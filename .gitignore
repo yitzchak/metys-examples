@@ -1,0 +1,6 @@
+*.session
+*.save
+figure/
+output/
+*-cache.yaml
+*.synctex.gz
