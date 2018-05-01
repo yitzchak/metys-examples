@@ -282,7 +282,7 @@ $\mathbf{atom}$ tells whether an expression is an atom.
 (%i2) op (p + q > p*q);
 \end{minted}
 \begin{equation}
-\tag{$\mathop{\mathrm{\%o}}_{2}$}\mbox{">"}
+\tag{$\mathop{\mathrm{\%o}}_{2}$}\mbox{"\textgreater "}
 \label{eq:doc-group1-code10-2-1}
 \end{equation}
 \begin{minted}[breaklines=true]{maxima}
@@ -345,21 +345,21 @@ $\mathbf{atom}$ tells whether an expression is an atom.
 (%i11) atom (p);
 \end{minted}
 \begin{equation}
-\tag{$\mathop{\mathrm{\%o}}_{11}$}\mathop{\mathrm{true}}
+\tag{$\mathop{\mathrm{\%o}}_{11}$}\mathop{\mathbf{true}}
 \label{eq:doc-group1-code10-11-1}
 \end{equation}
 \begin{minted}[breaklines=true]{maxima}
 (%i12) atom (p + q);
 \end{minted}
 \begin{equation}
-\tag{$\mathop{\mathrm{\%o}}_{12}$}\mathop{\mathrm{false}}
+\tag{$\mathop{\mathrm{\%o}}_{12}$}\mathop{\mathbf{false}}
 \label{eq:doc-group1-code10-12-1}
 \end{equation}
 \begin{minted}[breaklines=true]{maxima}
 (%i13) atom (sin (p + q));
 \end{minted}
 \begin{equation}
-\tag{$\mathop{\mathrm{\%o}}_{13}$}\mathop{\mathrm{false}}
+\tag{$\mathop{\mathrm{\%o}}_{13}$}\mathop{\mathbf{false}}
 \label{eq:doc-group1-code10-13-1}
 \end{equation}
 
@@ -371,7 +371,7 @@ We'll come back to that later.
 (%i1) op ('(block ([a], a: 42, a^2 - 1600)));
 \end{minted}
 \begin{equation}
-\tag{$\mathop{\mathrm{\%o}}_{1}$}\mathop\mathbf{block}\
+\tag{$\mathop{\mathrm{\%o}}_{1}$}\mathop{\mathbf{block}}
 \label{eq:doc-group1-code11-1-1}
 \end{equation}
 \begin{minted}[breaklines=true]{maxima}
@@ -399,14 +399,14 @@ We'll come back to that later.
 (%i5) args ('(if p > q then p else q));
 \end{minted}
 \begin{equation}
-\tag{$\mathop{\mathrm{\%o}}_{5}$}\left[p > q, p, \mathop{\mathrm{true}}, q\right]
+\tag{$\mathop{\mathrm{\%o}}_{5}$}\left[p > q, p, \mathop{\mathbf{true}}, q\right]
 \label{eq:doc-group1-code11-5-1}
 \end{equation}
 \begin{minted}[breaklines=true]{maxima}
 (%i6) args ('(for x in L do print (x)));
 \end{minted}
 \begin{equation}
-\tag{$\mathop{\mathrm{\%o}}_{6}$}\left[x, L, \mathop{\mathrm{false}}, \mathop{\mathrm{false}}, \mathop{\mathrm{false}}, \mathop{\mathrm{false}}, \mathop{\mathrm{print}}\left(x\right)\right]
+\tag{$\mathop{\mathrm{\%o}}_{6}$}\left[x, L, \mathop{\mathbf{false}}, \mathop{\mathbf{false}}, \mathop{\mathbf{false}}, \mathop{\mathbf{false}}, \mathop{\mathrm{print}}\left(x\right)\right]
 \label{eq:doc-group1-code11-6-1}
 \end{equation}
 
@@ -583,7 +583,7 @@ Examples: $\mathbf{save}$, $\mathbf{:=}$, $\mathbf{kill}$.
 (%i6) kill (a, b, c);
 \end{minted}
 \begin{equation}
-\tag{$\mathop{\mathrm{\%o}}_{6}$}\mathop\mathbf{done}
+\tag{$\mathop{\mathrm{\%o}}_{6}$}\mathop{\mathbf{done}}
 \label{eq:doc-group1-code15-6-1}
 \end{equation}
 \begin{minted}[breaklines=true]{maxima}
@@ -736,7 +736,7 @@ Contrast this with the effect of quote-quote.
 (%i4) apply (kill, [a, b, c]);
 \end{minted}
 \begin{equation}
-\tag{$\mathop{\mathrm{\%o}}_{4}$}\mathop\mathbf{done}
+\tag{$\mathop{\mathrm{\%o}}_{4}$}\mathop{\mathbf{done}}
 \label{eq:doc-group1-code19-4-1}
 \end{equation}
 \begin{minted}[breaklines=true]{maxima}
@@ -750,7 +750,7 @@ Contrast this with the effect of quote-quote.
 (%i6) kill (a, b, c);
 \end{minted}
 \begin{equation}
-\tag{$\mathop{\mathrm{\%o}}_{6}$}\mathop\mathbf{done}
+\tag{$\mathop{\mathrm{\%o}}_{6}$}\mathop{\mathbf{done}}
 \label{eq:doc-group1-code19-6-1}
 \end{equation}
 \begin{minted}[breaklines=true]{maxima}
@@ -829,7 +829,7 @@ simplification is prevented but not evaluation.
 (%i2) simp: false;
 \end{minted}
 \begin{equation}
-\tag{$\mathop{\mathrm{\%o}}_{2}$}\mathop{\mathrm{false}}
+\tag{$\mathop{\mathrm{\%o}}_{2}$}\mathop{\mathbf{false}}
 \label{eq:doc-group1-code21-2-1}
 \end{equation}
 \begin{minted}[breaklines=true]{maxima}
@@ -843,7 +843,7 @@ simplification is prevented but not evaluation.
 (%i4) simp: true;
 \end{minted}
 \begin{equation}
-\tag{$\mathop{\mathrm{\%o}}_{4}$}\mathop{\mathrm{true}}
+\tag{$\mathop{\mathrm{\%o}}_{4}$}\mathop{\mathbf{true}}
 \label{eq:doc-group1-code21-4-1}
 \end{equation}
 
@@ -962,7 +962,7 @@ The result is a list.
 (%i3) map (atom, [a, b, c, a + b, a + b + c]);
 \end{minted}
 \begin{equation}
-\tag{$\mathop{\mathrm{\%o}}_{3}$}\left[\mathop{\mathrm{true}}, \mathop{\mathrm{true}}, \mathop{\mathrm{true}}, \mathop{\mathrm{false}}, \mathop{\mathrm{false}}\right]
+\tag{$\mathop{\mathrm{\%o}}_{3}$}\left[\mathop{\mathbf{true}}, \mathop{\mathbf{true}}, \mathop{\mathbf{true}}, \mathop{\mathbf{false}}, \mathop{\mathbf{false}}\right]
 \label{eq:doc-group1-code24-3-1}
 \end{equation}
 
@@ -1301,7 +1301,7 @@ $\mathbf{plot2d}$ draws two-dimensional graphs.
 \end{minted}
 \includegraphics[width=\linewidth]{./figure/doc-group1-code31-1-1.pdf}
 \begin{equation}
-\tag{$\mathop{\mathrm{\%o}}_{1}$}\left[\mbox{"/tmp/maxout22799.gnuplot"}, \mbox{"/tmp/m.pdf"}\right]
+\tag{$\mathop{\mathrm{\%o}}_{1}$}\left[\mbox{"/tmp/maxout31130.gnuplot"}, \mbox{"/tmp/m.pdf"}\right]
 \label{eq:doc-group1-code31-1-1}
 \end{equation}
 \begin{minted}[breaklines=true]{maxima}
@@ -1309,7 +1309,7 @@ $\mathbf{plot2d}$ draws two-dimensional graphs.
 \end{minted}
 \includegraphics[width=\linewidth]{./figure/doc-group1-code31-2-1.pdf}
 \begin{equation}
-\tag{$\mathop{\mathrm{\%o}}_{2}$}\left[\mbox{"/tmp/maxout22799.gnuplot"}, \mbox{"/tmp/m.pdf"}\right]
+\tag{$\mathop{\mathrm{\%o}}_{2}$}\left[\mbox{"/tmp/maxout31130.gnuplot"}, \mbox{"/tmp/m.pdf"}\right]
 \label{eq:doc-group1-code31-2-1}
 \end{equation}
 \begin{minted}[breaklines=true]{maxima}
@@ -1331,7 +1331,7 @@ $\mathbf{plot2d}$ draws two-dimensional graphs.
 \end{minted}
 \includegraphics[width=\linewidth]{./figure/doc-group1-code31-5-1.pdf}
 \begin{equation}
-\tag{$\mathop{\mathrm{\%o}}_{5}$}\left[\mbox{"/tmp/maxout22799.gnuplot"}, \mbox{"/tmp/m.pdf"}\right]
+\tag{$\mathop{\mathrm{\%o}}_{5}$}\left[\mbox{"/tmp/maxout31130.gnuplot"}, \mbox{"/tmp/m.pdf"}\right]
 \label{eq:doc-group1-code31-5-1}
 \end{equation}
 \begin{minted}[breaklines=true]{maxima}
@@ -1339,7 +1339,7 @@ $\mathbf{plot2d}$ draws two-dimensional graphs.
 \end{minted}
 \includegraphics[width=\linewidth]{./figure/doc-group1-code31-6-1.pdf}
 \begin{equation}
-\tag{$\mathop{\mathrm{\%o}}_{6}$}\left[\mbox{"/tmp/maxout22799.gnuplot"}, \mbox{"/tmp/m.pdf"}\right]
+\tag{$\mathop{\mathrm{\%o}}_{6}$}\left[\mbox{"/tmp/maxout31130.gnuplot"}, \mbox{"/tmp/m.pdf"}\right]
 \label{eq:doc-group1-code31-6-1}
 \end{equation}
 
@@ -1616,7 +1616,7 @@ Type (to-maxima) to restart, ($quit) to quit Maxima.
 \begin{minted}[breaklines=true]{maxima}
 (%i2) (defmspec $bar (e) (let ((a (cdr e))) `((mplus) ((mtimes) ,@a) $%pi)))
 \end{minted}
-\#\textless FUNCTION (LAMBDA (E)) \{1002D5E14B\}\textgreater 
+\#\textless FUNCTION (LAMBDA (E)) \{1003C7D86B\}\textgreater 
 \begin{minted}[breaklines=true]{maxima}
 (%i3) (to-maxima)
 \end{minted}
