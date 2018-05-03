@@ -1,3 +1,4 @@
 set_tex_environment('?mdefine, "$$", "$$");
 texput('%phi, "\\varphi ");
 set_plot_option([pdf_file,"m.pdf"]);
+texify_add_styles(amsmath);

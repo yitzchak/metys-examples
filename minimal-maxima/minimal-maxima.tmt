@@ -5,8 +5,7 @@
   figure_env_options=H, code_env=minted, code_env_options.breaklines="true",
   stderr_echo=true, stderr_env=Verbatim,
   stderr_env_options.formatcom=\color{red},
-  stdout_echo=true, stdout_env=Verbatim,
-  math_tag=\%o{0}@
+  stdout_echo=true, stdout_env=Verbatim@
 \documentclass[12pt,leqno]{article}
 
 \usepackage{amsmath}
