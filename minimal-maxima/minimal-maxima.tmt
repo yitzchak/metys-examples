@@ -8,6 +8,7 @@
   stdout_echo=true, stdout_env=Verbatim@
 \documentclass[12pt,leqno]{article}
 
+\usepackage[T1]{fontenc}
 \usepackage{amsmath}
 \usepackage{fancyvrb}
 \usepackage{float}
