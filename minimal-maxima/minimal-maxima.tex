@@ -11,8 +11,12 @@
 \usepackage{graphicx}
 \usepackage[outputdir=output]{minted}
 \usepackage{xcolor}
-%\usepackage{gnuplot-lua-tikz}
+\usepackage{breqn}
 \usepackage[colorlinks,linkcolor=red]{hyperref}
+\usepackage{etoolbox}
+
+\BeforeBeginEnvironment{dmath}{\begin{minipage}{\textwidth}}
+\AfterEndEnvironment{dmath}{\end{minipage}}
 
 \addtolength{\topmargin}{-0.5in}
 \addtolength{\textheight}{1in}
@@ -25,6 +29,12 @@
 {\small Released under the terms of the GNU General Public License, Version 2}}
 \author{Robert Dodier}
 \date{\today}
+
+\newcommand{\breakingcomma}{%
+  \begingroup\lccode`~=`,
+  \lowercase{\endgroup\expandafter\def\expandafter~\expandafter{~\penalty0 }}}
+
+\breakingcomma
 
 \begin{document}
 \maketitle
@@ -56,46 +66,41 @@ Let's see some examples.
 \begin{minted}[breaklines=true]{maxima}
 (%i1) V: 4/3 * %pi * r^3;
 \end{minted}
-\begin{equation}
-\tag{$\mathop{\mathrm{\%o}_{1}}$}\frac{4 \pi {r}^{3}}{3}
-\label{eq:doc-group1-code1-1}
-\end{equation}
+\begin{dmath}[number={\(\mathop{\mathrm{\%o}_{1}}\)}]
+\frac{4 \pi {r}^{3}}{3}
+\end{dmath}
 
 \item The radius is 10.
 \begin{minted}[breaklines=true]{maxima}
 (%i2) r: 10;
 \end{minted}
-\begin{equation}
-\tag{$\mathop{\mathrm{\%o}_{2}}$}10
-\label{eq:doc-group1-code2-1}
-\end{equation}
+\begin{dmath}[number={\(\mathop{\mathrm{\%o}_{2}}\)}]
+10
+\end{dmath}
 
 \item $V$ is the same as before; Maxima won't change $V$ until I tell it to do so.
 \begin{minted}[breaklines=true]{maxima}
 (%i3) V;
 \end{minted}
-\begin{equation}
-\tag{$\mathop{\mathrm{\%o}_{3}}$}\frac{4 \pi {r}^{3}}{3}
-\label{eq:doc-group1-code3-1}
-\end{equation}
+\begin{dmath}[number={\(\mathop{\mathrm{\%o}_{3}}\)}]
+\frac{4 \pi {r}^{3}}{3}
+\end{dmath}
 
 \item Please re-evaluate $V$, Maxima.
 \begin{minted}[breaklines=true]{maxima}
 (%i4) ''V;
 \end{minted}
-\begin{equation}
-\tag{$\mathop{\mathrm{\%o}_{4}}$}\frac{4000 \pi}{3}
-\label{eq:doc-group1-code4-1}
-\end{equation}
+\begin{dmath}[number={\(\mathop{\mathrm{\%o}_{4}}\)}]
+\frac{4000 \pi}{3}
+\end{dmath}
 
 \item I'd like to see a numerical value instead of an expression.
 \begin{minted}[breaklines=true]{maxima}
 (%i5) ''V, numer;
 \end{minted}
-\begin{equation}
-\tag{$\mathop{\mathrm{\%o}_{5}}$}4188.790204786391
-\label{eq:doc-group1-code5-1}
-\end{equation}
+\begin{dmath}[number={\(\mathop{\mathrm{\%o}_{5}}\)}]
+4188.790204786391
+\end{dmath}
 
 \end{enumerate}
 
@@ -147,19 +152,17 @@ I've grouped several examples into a list so we can see them all together.
 \begin{minted}[breaklines=true]{maxima}
 (%i1) [a, foo, foo_bar, "Hello, world!", 42, 17.29];
 \end{minted}
-\begin{equation}
-\tag{$\mathop{\mathrm{\%o}_{1}}$}\left[a, \mathop{\mathrm{foo}}, \mathop{\mathrm{foo\_bar}}, \mbox{"Hello, world!"}, 42, 17.29\right]
-\label{eq:doc-group1-code6-1}
-\end{equation}
+\begin{dmath}[number={\(\mathop{\mathrm{\%o}_{1}}\)}]
+\left[a, \mathop{\mathrm{foo}}, \mathop{\mathrm{foo\_bar}}, \mbox{"Hello, world!"}, 42, 17.29\right]
+\end{dmath}
 
 \item Mathematical expressions.
 \begin{minted}[breaklines=true]{maxima}
 (%i2) [a + b + c, a * b * c, foo = bar, a*b < c*d];
 \end{minted}
-\begin{equation}
-\tag{$\mathop{\mathrm{\%o}_{2}}$}\left[c+b+a, a b c, \mathop{\mathrm{foo}} = \mathop{\mathrm{bar}}, a b < c d\right]
-\label{eq:doc-group1-code7-1}
-\end{equation}
+\begin{dmath}[number={\(\mathop{\mathrm{\%o}_{2}}\)}]
+\left[c+b+a, a b c, \mathop{\mathrm{foo}} = \mathop{\mathrm{bar}}, a b < c d\right]
+\end{dmath}
 
 
 \item Lists and matrices.
@@ -168,72 +171,63 @@ even another list or matrix.
 \begin{minted}[breaklines=true]{maxima}
 (%i1) L: [a, b, c, %pi, %e, 1729, 1/(a*d - b*c)];
 \end{minted}
-\begin{equation}
-\tag{$\mathop{\mathrm{\%o}_{1}}$}\left[a, b, c, \pi, e, 1729, \frac{1}{a d-b c}\right]
-\label{eq:doc-group1-code8-1-1}
-\end{equation}
+\begin{dmath}[number={\(\mathop{\mathrm{\%o}_{1}}\)}]
+\left[a, b, c, \pi, e, 1729, \frac{1}{a d-b c}\right]
+\end{dmath}
 \begin{minted}[breaklines=true]{maxima}
 (%i2) L2: [a, b, [c, %pi, [%e, 1729], 1/(a*d - b*c)]];
 \end{minted}
-\begin{equation}
-\tag{$\mathop{\mathrm{\%o}_{2}}$}\left[a, b, \left[c, \pi, \left[e, 1729\right], \frac{1}{a d-b c}\right]\right]
-\label{eq:doc-group1-code8-2-1}
-\end{equation}
+\begin{dmath}[number={\(\mathop{\mathrm{\%o}_{2}}\)}]
+\left[a, b, \left[c, \pi, \left[e, 1729\right], \frac{1}{a d-b c}\right]\right]
+\end{dmath}
 \begin{minted}[breaklines=true]{maxima}
 (%i3) L [7];
 \end{minted}
-\begin{equation}
-\tag{$\mathop{\mathrm{\%o}_{3}}$}\frac{1}{a d-b c}
-\label{eq:doc-group1-code8-3-1}
-\end{equation}
+\begin{dmath}[number={\(\mathop{\mathrm{\%o}_{3}}\)}]
+\frac{1}{a d-b c}
+\end{dmath}
 \begin{minted}[breaklines=true]{maxima}
 (%i4) L2 [3];
 \end{minted}
-\begin{equation}
-\tag{$\mathop{\mathrm{\%o}_{4}}$}\left[c, \pi, \left[e, 1729\right], \frac{1}{a d-b c}\right]
-\label{eq:doc-group1-code8-4-1}
-\end{equation}
+\begin{dmath}[number={\(\mathop{\mathrm{\%o}_{4}}\)}]
+\left[c, \pi, \left[e, 1729\right], \frac{1}{a d-b c}\right]
+\end{dmath}
 \begin{minted}[breaklines=true]{maxima}
 (%i5) M: matrix ([%pi, 17], [29, %e]);
 \end{minted}
-\begin{equation}
-\tag{$\mathop{\mathrm{\%o}_{5}}$}\begin{bmatrix}
+\begin{dmath}[number={\(\mathop{\mathrm{\%o}_{5}}\)}]
+\begin{bmatrix}
   \pi & 17\\
   29 & e
 \end{bmatrix}
-\label{eq:doc-group1-code8-5-1}
-\end{equation}
+\end{dmath}
 \begin{minted}[breaklines=true]{maxima}
 (%i6) M2: matrix ([[%pi, 17], a*d - b*c], [matrix ([1, a], [b, 7]), %e]);
 \end{minted}
-\begin{equation}
-\tag{$\mathop{\mathrm{\%o}_{6}}$}\begin{bmatrix}
+\begin{dmath}[number={\(\mathop{\mathrm{\%o}_{6}}\)}]
+\begin{bmatrix}
   \left[\pi, 17\right] & a d-b c\\
   \begin{bmatrix}
   1 & a\\
   b & 7
+\end{bmatrix} & e
 \end{bmatrix}
- & e
-\end{bmatrix}
-\label{eq:doc-group1-code8-6-1}
-\end{equation}
+\end{dmath}
 \begin{minted}[breaklines=true]{maxima}
 (%i7) M [2][1];
 \end{minted}
-\begin{equation}
-\tag{$\mathop{\mathrm{\%o}_{7}}$}29
-\label{eq:doc-group1-code8-7-1}
-\end{equation}
+\begin{dmath}[number={\(\mathop{\mathrm{\%o}_{7}}\)}]
+29
+\end{dmath}
 \begin{minted}[breaklines=true]{maxima}
 (%i8) M2 [2][1];
 \end{minted}
-\begin{equation}
-\tag{$\mathop{\mathrm{\%o}_{8}}$}\begin{bmatrix}
+\begin{dmath}[number={\(\mathop{\mathrm{\%o}_{8}}\)}]
+\begin{bmatrix}
   1 & a\\
   b & 7
 \end{bmatrix}
-\label{eq:doc-group1-code8-8-1}
-\end{equation}
+\end{dmath}
 
 
 \item Programming constructs are expressions.
@@ -243,31 +237,27 @@ the value of the block is the value of the last expression.
 \begin{minted}[breaklines=true]{maxima}
 (%i1) (a: 42) - (b: 17);
 \end{minted}
-\begin{equation}
-\tag{$\mathop{\mathrm{\%o}_{1}}$}25
-\label{eq:doc-group1-code9-1-1}
-\end{equation}
+\begin{dmath}[number={\(\mathop{\mathrm{\%o}_{1}}\)}]
+25
+\end{dmath}
 \begin{minted}[breaklines=true]{maxima}
 (%i2) [a,b];
 \end{minted}
-\begin{equation}
-\tag{$\mathop{\mathrm{\%o}_{2}}$}\left[42, 17\right]
-\label{eq:doc-group1-code9-2-1}
-\end{equation}
+\begin{dmath}[number={\(\mathop{\mathrm{\%o}_{2}}\)}]
+\left[42, 17\right]
+\end{dmath}
 \begin{minted}[breaklines=true]{maxima}
 (%i3) block ([a], a: 42, a^2 - 1600) + block ([b], b: 5, %pi^b);
 \end{minted}
-\begin{equation}
-\tag{$\mathop{\mathrm{\%o}_{3}}$}{\pi}^{5}+164
-\label{eq:doc-group1-code9-3-1}
-\end{equation}
+\begin{dmath}[number={\(\mathop{\mathrm{\%o}_{3}}\)}]
+{\pi}^{5}+164
+\end{dmath}
 \begin{minted}[breaklines=true]{maxima}
 (%i4) (if a > 1 then %pi else %e) + (if b < 0 then 1/2 else 1/7);
 \end{minted}
-\begin{equation}
-\tag{$\mathop{\mathrm{\%o}_{4}}$}\pi+\frac{1}{7}
-\label{eq:doc-group1-code9-4-1}
-\end{equation}
+\begin{dmath}[number={\(\mathop{\mathrm{\%o}_{4}}\)}]
+\pi+\frac{1}{7}
+\end{dmath}
 
 
 \item $\mathbf{op}$ returns the operator, $\mathbf{args}$ returns the arguments,
@@ -275,94 +265,81 @@ $\mathbf{atom}$ tells whether an expression is an atom.
 \begin{minted}[breaklines=true]{maxima}
 (%i1) op (p + q);
 \end{minted}
-\begin{equation}
-\tag{$\mathop{\mathrm{\%o}_{1}}$}\mbox{"+"}
-\label{eq:doc-group1-code10-1-1}
-\end{equation}
+\begin{dmath}[number={\(\mathop{\mathrm{\%o}_{1}}\)}]
+\mbox{"+"}
+\end{dmath}
 \begin{minted}[breaklines=true]{maxima}
 (%i2) op (p + q > p*q);
 \end{minted}
-\begin{equation}
-\tag{$\mathop{\mathrm{\%o}_{2}}$}\mbox{"\textgreater "}
-\label{eq:doc-group1-code10-2-1}
-\end{equation}
+\begin{dmath}[number={\(\mathop{\mathrm{\%o}_{2}}\)}]
+\mbox{"\textgreater "}
+\end{dmath}
 \begin{minted}[breaklines=true]{maxima}
 (%i3) op (sin (p + q));
 \end{minted}
-\begin{equation}
-\tag{$\mathop{\mathrm{\%o}_{3}}$}\sin
-\label{eq:doc-group1-code10-3-1}
-\end{equation}
+\begin{dmath}[number={\(\mathop{\mathrm{\%o}_{3}}\)}]
+\sin
+\end{dmath}
 \begin{minted}[breaklines=true]{maxima}
 (%i4) op (foo (p, q));
 \end{minted}
-\begin{equation}
-\tag{$\mathop{\mathrm{\%o}_{4}}$}\mathop{\mathrm{foo}}
-\label{eq:doc-group1-code10-4-1}
-\end{equation}
+\begin{dmath}[number={\(\mathop{\mathrm{\%o}_{4}}\)}]
+\mathop{\mathrm{foo}}
+\end{dmath}
 \begin{minted}[breaklines=true]{maxima}
 (%i5) op (foo (p, q) := p - q);
 \end{minted}
-\begin{equation}
-\tag{$\mathop{\mathrm{\%o}_{5}}$}\mbox{":="}
-\label{eq:doc-group1-code10-5-1}
-\end{equation}
+\begin{dmath}[number={\(\mathop{\mathrm{\%o}_{5}}\)}]
+\mbox{":="}
+\end{dmath}
 \begin{minted}[breaklines=true]{maxima}
 (%i6) args (p + q);
 \end{minted}
-\begin{equation}
-\tag{$\mathop{\mathrm{\%o}_{6}}$}\left[q, p\right]
-\label{eq:doc-group1-code10-6-1}
-\end{equation}
+\begin{dmath}[number={\(\mathop{\mathrm{\%o}_{6}}\)}]
+\left[q, p\right]
+\end{dmath}
 \begin{minted}[breaklines=true]{maxima}
 (%i7) args (p + q > p*q);
 \end{minted}
-\begin{equation}
-\tag{$\mathop{\mathrm{\%o}_{7}}$}\left[q+p, p q\right]
-\label{eq:doc-group1-code10-7-1}
-\end{equation}
+\begin{dmath}[number={\(\mathop{\mathrm{\%o}_{7}}\)}]
+\left[q+p, p q\right]
+\end{dmath}
 \begin{minted}[breaklines=true]{maxima}
 (%i8) args (sin (p + q));
 \end{minted}
-\begin{equation}
-\tag{$\mathop{\mathrm{\%o}_{8}}$}\left[q+p\right]
-\label{eq:doc-group1-code10-8-1}
-\end{equation}
+\begin{dmath}[number={\(\mathop{\mathrm{\%o}_{8}}\)}]
+\left[q+p\right]
+\end{dmath}
 \begin{minted}[breaklines=true]{maxima}
 (%i9) args (foo (p, q));
 \end{minted}
-\begin{equation}
-\tag{$\mathop{\mathrm{\%o}_{9}}$}\left[p, -q\right]
-\label{eq:doc-group1-code10-9-1}
-\end{equation}
+\begin{dmath}[number={\(\mathop{\mathrm{\%o}_{9}}\)}]
+\left[p, -q\right]
+\end{dmath}
 \begin{minted}[breaklines=true]{maxima}
 (%i10) args (foo (p, q) := p - q);
 \end{minted}
-\begin{equation}
-\tag{$\mathop{\mathrm{\%o}_{10}}$}\left[\mathop{\mathrm{foo}}\left(p, q\right), p-q\right]
-\label{eq:doc-group1-code10-10-1}
-\end{equation}
+\begin{dmath}[number={\(\mathop{\mathrm{\%o}_{10}}\)}]
+\left[\mathop{\mathrm{foo}}\left(p, q\right), p-q\right]
+\end{dmath}
 \begin{minted}[breaklines=true]{maxima}
 (%i11) atom (p);
 \end{minted}
-\begin{equation}
-\tag{$\mathop{\mathrm{\%o}_{11}}$}\mathop{\mathbf{true}}
-\label{eq:doc-group1-code10-11-1}
-\end{equation}
+\begin{dmath}[number={\(\mathop{\mathrm{\%o}_{11}}\)}]
+\mathop{\mathbf{true}}
+\end{dmath}
 \begin{minted}[breaklines=true]{maxima}
 (%i12) atom (p + q);
 \end{minted}
-\begin{equation}
-\tag{$\mathop{\mathrm{\%o}_{12}}$}\mathop{\mathbf{false}}
-\label{eq:doc-group1-code10-12-1}
-\end{equation}
+\begin{dmath}[number={\(\mathop{\mathrm{\%o}_{12}}\)}]
+\mathop{\mathbf{false}}
+\end{dmath}
 \begin{minted}[breaklines=true]{maxima}
 (%i13) atom (sin (p + q));
 \end{minted}
-\begin{equation}
-\tag{$\mathop{\mathrm{\%o}_{13}}$}\mathop{\mathbf{false}}
-\label{eq:doc-group1-code10-13-1}
-\end{equation}
+\begin{dmath}[number={\(\mathop{\mathrm{\%o}_{13}}\)}]
+\mathop{\mathbf{false}}
+\end{dmath}
 
 
 \item Operators and arguments of programming constructs.
@@ -371,45 +348,39 @@ We'll come back to that later.
 \begin{minted}[breaklines=true]{maxima}
 (%i1) op ('(block ([a], a: 42, a^2 - 1600)));
 \end{minted}
-\begin{equation}
-\tag{$\mathop{\mathrm{\%o}_{1}}$}\mathop{\mathbf{block}}
-\label{eq:doc-group1-code11-1-1}
-\end{equation}
+\begin{dmath}[number={\(\mathop{\mathrm{\%o}_{1}}\)}]
+\mathop{\mathbf{block}}
+\end{dmath}
 \begin{minted}[breaklines=true]{maxima}
 (%i2) op ('(if p > q then p else q));
 \end{minted}
-\begin{equation}
-\tag{$\mathop{\mathrm{\%o}_{2}}$}\mbox{"if"}
-\label{eq:doc-group1-code11-2-1}
-\end{equation}
+\begin{dmath}[number={\(\mathop{\mathrm{\%o}_{2}}\)}]
+\mbox{"if"}
+\end{dmath}
 \begin{minted}[breaklines=true]{maxima}
 (%i3) op ('(for x in L do print (x)));
 \end{minted}
-\begin{equation}
-\tag{$\mathop{\mathrm{\%o}_{3}}$}\mathop{\mathrm{mdoin}}
-\label{eq:doc-group1-code11-3-1}
-\end{equation}
+\begin{dmath}[number={\(\mathop{\mathrm{\%o}_{3}}\)}]
+\mathop{\mathrm{mdoin}}
+\end{dmath}
 \begin{minted}[breaklines=true]{maxima}
 (%i4) args ('(block ([a], a: 42, a^2 - 1600)));
 \end{minted}
-\begin{equation}
-\tag{$\mathop{\mathrm{\%o}_{4}}$}\left[\left[a\right], a : 42, {a}^{2}-1600\right]
-\label{eq:doc-group1-code11-4-1}
-\end{equation}
+\begin{dmath}[number={\(\mathop{\mathrm{\%o}_{4}}\)}]
+\left[\left[a\right], a \hiderel{:} 42, {a}^{2}-1600\right]
+\end{dmath}
 \begin{minted}[breaklines=true]{maxima}
 (%i5) args ('(if p > q then p else q));
 \end{minted}
-\begin{equation}
-\tag{$\mathop{\mathrm{\%o}_{5}}$}\left[p > q, p, \mathop{\mathbf{true}}, q\right]
-\label{eq:doc-group1-code11-5-1}
-\end{equation}
+\begin{dmath}[number={\(\mathop{\mathrm{\%o}_{5}}\)}]
+\left[p > q, p, \mathop{\mathbf{true}}, q\right]
+\end{dmath}
 \begin{minted}[breaklines=true]{maxima}
 (%i6) args ('(for x in L do print (x)));
 \end{minted}
-\begin{equation}
-\tag{$\mathop{\mathrm{\%o}_{6}}$}\left[x, L, \mathop{\mathbf{false}}, \mathop{\mathbf{false}}, \mathop{\mathbf{false}}, \mathop{\mathbf{false}}, \mathop{\mathrm{print}}\left(x\right)\right]
-\label{eq:doc-group1-code11-6-1}
-\end{equation}
+\begin{dmath}[number={\(\mathop{\mathrm{\%o}_{6}}\)}]
+\left[x, L, \mathop{\mathbf{false}}, \mathop{\mathbf{false}}, \mathop{\mathbf{false}}, \mathop{\mathbf{false}}, \mathop{\mathrm{print}}\left(x\right)\right]
+\end{dmath}
 
 
 \end{enumerate}
@@ -466,48 +437,42 @@ Let's consider how some expressions are evaluated.
 \begin{minted}[breaklines=true]{maxima}
 (%i1) block (a: 1, b: 2, e: 5);
 \end{minted}
-\begin{equation}
-\tag{$\mathop{\mathrm{\%o}_{1}}$}5
-\label{eq:doc-group1-code12-1-1}
-\end{equation}
+\begin{dmath}[number={\(\mathop{\mathrm{\%o}_{1}}\)}]
+5
+\end{dmath}
 \begin{minted}[breaklines=true]{maxima}
 (%i2) [a, b, c, d, e];
 \end{minted}
-\begin{equation}
-\tag{$\mathop{\mathrm{\%o}_{2}}$}\left[1, 2, c, d, 5\right]
-\label{eq:doc-group1-code12-2-1}
-\end{equation}
+\begin{dmath}[number={\(\mathop{\mathrm{\%o}_{2}}\)}]
+\left[1, 2, c, d, 5\right]
+\end{dmath}
 
 
 \item Arguments of operators are ordinarily evaluated (unless evaluation is prevented one way or another).
 \begin{minted}[breaklines=true]{maxima}
 (%i1) block (x: %pi, y: %e);
 \end{minted}
-\begin{equation}
-\tag{$\mathop{\mathrm{\%o}_{1}}$}e
-\label{eq:doc-group1-code13-1-1}
-\end{equation}
+\begin{dmath}[number={\(\mathop{\mathrm{\%o}_{1}}\)}]
+e
+\end{dmath}
 \begin{minted}[breaklines=true]{maxima}
 (%i2) sin (x + y);
 \end{minted}
-\begin{equation}
-\tag{$\mathop{\mathrm{\%o}_{2}}$}-\sin e
-\label{eq:doc-group1-code13-2-1}
-\end{equation}
+\begin{dmath}[number={\(\mathop{\mathrm{\%o}_{2}}\)}]
+-\sin e
+\end{dmath}
 \begin{minted}[breaklines=true]{maxima}
 (%i3) x > y;
 \end{minted}
-\begin{equation}
-\tag{$\mathop{\mathrm{\%o}_{3}}$}\pi > e
-\label{eq:doc-group1-code13-3-1}
-\end{equation}
+\begin{dmath}[number={\(\mathop{\mathrm{\%o}_{3}}\)}]
+\pi > e
+\end{dmath}
 \begin{minted}[breaklines=true]{maxima}
 (%i4) x!;
 \end{minted}
-\begin{equation}
-\tag{$\mathop{\mathrm{\%o}_{4}}$}\pi!
-\label{eq:doc-group1-code13-4-1}
-\end{equation}
+\begin{dmath}[number={\(\mathop{\mathrm{\%o}_{4}}\)}]
+\pi!
+\end{dmath}
 
 
 \item If an operator corresponds to a callable function,
@@ -516,31 +481,27 @@ Otherwise evaluation yields another expression with the same operator.
 \begin{minted}[breaklines=true]{maxima}
 (%i1) foo (p, q) := p - q;
 \end{minted}
-\begin{equation}
-\tag{$\mathop{\mathrm{\%o}_{1}}$}\mathop{\mathrm{foo}}\left(p, q\right) := p-q
-\label{eq:doc-group1-code14-1-1}
-\end{equation}
+\begin{dmath}[number={\(\mathop{\mathrm{\%o}_{1}}\)}]
+\mathop{\mathrm{foo}}\left(p, q\right) \hiderel{:=} p-q
+\end{dmath}
 \begin{minted}[breaklines=true]{maxima}
 (%i2) p: %phi;
 \end{minted}
-\begin{equation}
-\tag{$\mathop{\mathrm{\%o}_{2}}$}\varphi
-\label{eq:doc-group1-code14-2-1}
-\end{equation}
+\begin{dmath}[number={\(\mathop{\mathrm{\%o}_{2}}\)}]
+\varphi
+\end{dmath}
 \begin{minted}[breaklines=true]{maxima}
 (%i3) foo (p, q);
 \end{minted}
-\begin{equation}
-\tag{$\mathop{\mathrm{\%o}_{3}}$}\varphi-q
-\label{eq:doc-group1-code14-3-1}
-\end{equation}
+\begin{dmath}[number={\(\mathop{\mathrm{\%o}_{3}}\)}]
+\varphi-q
+\end{dmath}
 \begin{minted}[breaklines=true]{maxima}
 (%i4) bar (p, q);
 \end{minted}
-\begin{equation}
-\tag{$\mathop{\mathrm{\%o}_{4}}$}\mathop{\mathrm{bar}}\left(\varphi, q\right)
-\label{eq:doc-group1-code14-4-1}
-\end{equation}
+\begin{dmath}[number={\(\mathop{\mathrm{\%o}_{4}}\)}]
+\mathop{\mathrm{bar}}\left(\varphi, q\right)
+\end{dmath}
 
 
 \item Some functions quote their arguments.
@@ -548,121 +509,105 @@ Examples: $\mathbf{save}$, $\mathbf{:=}$, $\mathbf{kill}$.
 \begin{minted}[breaklines=true]{maxima}
 (%i1) block (a: 1, b: %pi, c: x + y);
 \end{minted}
-\begin{equation}
-\tag{$\mathop{\mathrm{\%o}_{1}}$}y+x
-\label{eq:doc-group1-code15-1-1}
-\end{equation}
+\begin{dmath}[number={\(\mathop{\mathrm{\%o}_{1}}\)}]
+y+x
+\end{dmath}
 \begin{minted}[breaklines=true]{maxima}
 (%i2) [a, b, c];
 \end{minted}
-\begin{equation}
-\tag{$\mathop{\mathrm{\%o}_{2}}$}\left[1, \pi, y+x\right]
-\label{eq:doc-group1-code15-2-1}
-\end{equation}
+\begin{dmath}[number={\(\mathop{\mathrm{\%o}_{2}}\)}]
+\left[1, \pi, y+x\right]
+\end{dmath}
 \begin{minted}[breaklines=true]{maxima}
 (%i3) save ("tmp.save", a, b, c);
 \end{minted}
-\begin{equation}
-\tag{$\mathop{\mathrm{\%o}_{3}}$}\mbox{"/home/yitzi/Documents/git/metys-examples/minimal-maxima/tmp.save"}
-\label{eq:doc-group1-code15-3-1}
-\end{equation}
+\begin{dmath}[number={\(\mathop{\mathrm{\%o}_{3}}\)}]
+\mbox{"/home/tburton/Documents/git/metys-examples/minimal-maxima/tmp.save"}
+\end{dmath}
 \begin{minted}[breaklines=true]{maxima}
 (%i4) f (a) := a^b;
 \end{minted}
-\begin{equation}
-\tag{$\mathop{\mathrm{\%o}_{4}}$}f\left(a\right) := {a}^{b}
-\label{eq:doc-group1-code15-4-1}
-\end{equation}
+\begin{dmath}[number={\(\mathop{\mathrm{\%o}_{4}}\)}]
+f\left(a\right) \hiderel{:=} {a}^{b}
+\end{dmath}
 \begin{minted}[breaklines=true]{maxima}
 (%i5) f (7);
 \end{minted}
-\begin{equation}
-\tag{$\mathop{\mathrm{\%o}_{5}}$}{7}^{\pi}
-\label{eq:doc-group1-code15-5-1}
-\end{equation}
+\begin{dmath}[number={\(\mathop{\mathrm{\%o}_{5}}\)}]
+{7}^{\pi}
+\end{dmath}
 \begin{minted}[breaklines=true]{maxima}
 (%i6) kill (a, b, c);
 \end{minted}
-\begin{equation}
-\tag{$\mathop{\mathrm{\%o}_{6}}$}\mathop{\mathbf{done}}
-\label{eq:doc-group1-code15-6-1}
-\end{equation}
+\begin{dmath}[number={\(\mathop{\mathrm{\%o}_{6}}\)}]
+\mathop{\mathbf{done}}
+\end{dmath}
 \begin{minted}[breaklines=true]{maxima}
 (%i7) [a, b, c];
 \end{minted}
-\begin{equation}
-\tag{$\mathop{\mathrm{\%o}_{7}}$}\left[a, b, c\right]
-\label{eq:doc-group1-code15-7-1}
-\end{equation}
+\begin{dmath}[number={\(\mathop{\mathrm{\%o}_{7}}\)}]
+\left[a, b, c\right]
+\end{dmath}
 
 
 \item A single quote prevents evaluation even if it would ordinarily happen.
 \begin{minted}[breaklines=true]{maxima}
 (%i1) foo (x, y) := y - x;
 \end{minted}
-\begin{equation}
-\tag{$\mathop{\mathrm{\%o}_{1}}$}\mathop{\mathrm{foo}}\left(x, y\right) := y-x
-\label{eq:doc-group1-code16-1-1}
-\end{equation}
+\begin{dmath}[number={\(\mathop{\mathrm{\%o}_{1}}\)}]
+\mathop{\mathrm{foo}}\left(x, y\right) \hiderel{:=} y-x
+\end{dmath}
 \begin{minted}[breaklines=true]{maxima}
 (%i2) block (a: %e, b: 17);
 \end{minted}
-\begin{equation}
-\tag{$\mathop{\mathrm{\%o}_{2}}$}17
-\label{eq:doc-group1-code16-2-1}
-\end{equation}
+\begin{dmath}[number={\(\mathop{\mathrm{\%o}_{2}}\)}]
+17
+\end{dmath}
 \begin{minted}[breaklines=true]{maxima}
 (%i3) foo (a, b);
 \end{minted}
-\begin{equation}
-\tag{$\mathop{\mathrm{\%o}_{3}}$}17-e
-\label{eq:doc-group1-code16-3-1}
-\end{equation}
+\begin{dmath}[number={\(\mathop{\mathrm{\%o}_{3}}\)}]
+17-e
+\end{dmath}
 \begin{minted}[breaklines=true]{maxima}
 (%i4) foo ('a, 'b);
 \end{minted}
-\begin{equation}
-\tag{$\mathop{\mathrm{\%o}_{4}}$}b-a
-\label{eq:doc-group1-code16-4-1}
-\end{equation}
+\begin{dmath}[number={\(\mathop{\mathrm{\%o}_{4}}\)}]
+b-a
+\end{dmath}
 \begin{minted}[breaklines=true]{maxima}
 (%i5) 'foo (a, b);
 \end{minted}
-\begin{equation}
-\tag{$\mathop{\mathrm{\%o}_{5}}$}\mathop{\mathrm{foo}}\left(e, 17\right)
-\label{eq:doc-group1-code16-5-1}
-\end{equation}
+\begin{dmath}[number={\(\mathop{\mathrm{\%o}_{5}}\)}]
+\mathop{\mathrm{foo}}\left(e, 17\right)
+\end{dmath}
 \begin{minted}[breaklines=true]{maxima}
 (%i6) '(foo (a, b));
 \end{minted}
-\begin{equation}
-\tag{$\mathop{\mathrm{\%o}_{6}}$}\mathop{\mathrm{foo}}\left(a, b\right)
-\label{eq:doc-group1-code16-6-1}
-\end{equation}
+\begin{dmath}[number={\(\mathop{\mathrm{\%o}_{6}}\)}]
+\mathop{\mathrm{foo}}\left(a, b\right)
+\end{dmath}
 
 
 \item Two single quotes (quote-quote) causes an extra evaluation at the time the expression is parsed.
 \begin{minted}[breaklines=true]{maxima}
 (%i1) diff (sin (x), x);
 \end{minted}
-\begin{equation}
-\tag{$\mathop{\mathrm{\%o}_{1}}$}\cos x
-\label{eq:doc-group1-code17-1-1}
-\end{equation}
+\begin{dmath}[number={\(\mathop{\mathrm{\%o}_{1}}\)}]
+\cos x
+\end{dmath}
 \begin{minted}[breaklines=true]{maxima}
 (%i2) foo (x) := diff (sin (x), x);
 \end{minted}
-\begin{equation}
-\tag{$\mathop{\mathrm{\%o}_{2}}$}\mathop{\mathrm{foo}}\left(x\right) := \frac{d}{d x}\sin x
-\label{eq:doc-group1-code17-2-1}
-\end{equation}
+\begin{dmath}[number={\(\mathop{\mathrm{\%o}_{2}}\)}]
+\mathop{\mathrm{foo}}\left(x\right) \hiderel{:=} \frac{d}{d x}\sin x
+\end{dmath}
 \begin{minted}[breaklines=true]{maxima}
 (%i3) foo (x) := ''(diff (sin (x), x));
 \end{minted}
-\begin{equation}
-\tag{$\mathop{\mathrm{\%o}_{3}}$}\mathop{\mathrm{foo}}\left(x\right) := \cos x
-\label{eq:doc-group1-code17-3-1}
-\end{equation}
+\begin{dmath}[number={\(\mathop{\mathrm{\%o}_{3}}\)}]
+\mathop{\mathrm{foo}}\left(x\right) \hiderel{:=} \cos x
+\end{dmath}
 
 
 \item $\mathbf{ev}$ causes an extra evaluation every time it is evaluated.
@@ -670,121 +615,105 @@ Contrast this with the effect of quote-quote.
 \begin{minted}[breaklines=true]{maxima}
 (%i1) block (xx: yy, yy: zz);
 \end{minted}
-\begin{equation}
-\tag{$\mathop{\mathrm{\%o}_{1}}$}\mathop{\mathrm{zz}}
-\label{eq:doc-group1-code18-1-1}
-\end{equation}
+\begin{dmath}[number={\(\mathop{\mathrm{\%o}_{1}}\)}]
+\mathop{\mathrm{zz}}
+\end{dmath}
 \begin{minted}[breaklines=true]{maxima}
 (%i2) [xx, yy];
 \end{minted}
-\begin{equation}
-\tag{$\mathop{\mathrm{\%o}_{2}}$}\left[\mathop{\mathrm{yy}}, \mathop{\mathrm{zz}}\right]
-\label{eq:doc-group1-code18-2-1}
-\end{equation}
+\begin{dmath}[number={\(\mathop{\mathrm{\%o}_{2}}\)}]
+\left[\mathop{\mathrm{yy}}, \mathop{\mathrm{zz}}\right]
+\end{dmath}
 \begin{minted}[breaklines=true]{maxima}
 (%i3) foo (x) := ''x;
 \end{minted}
-\begin{equation}
-\tag{$\mathop{\mathrm{\%o}_{3}}$}\mathop{\mathrm{foo}}\left(x\right) := x
-\label{eq:doc-group1-code18-3-1}
-\end{equation}
+\begin{dmath}[number={\(\mathop{\mathrm{\%o}_{3}}\)}]
+\mathop{\mathrm{foo}}\left(x\right) \hiderel{:=} x
+\end{dmath}
 \begin{minted}[breaklines=true]{maxima}
 (%i4) foo (xx);
 \end{minted}
-\begin{equation}
-\tag{$\mathop{\mathrm{\%o}_{4}}$}\mathop{\mathrm{yy}}
-\label{eq:doc-group1-code18-4-1}
-\end{equation}
+\begin{dmath}[number={\(\mathop{\mathrm{\%o}_{4}}\)}]
+\mathop{\mathrm{yy}}
+\end{dmath}
 \begin{minted}[breaklines=true]{maxima}
 (%i5) bar (x) := ev (x);
 \end{minted}
-\begin{equation}
-\tag{$\mathop{\mathrm{\%o}_{5}}$}\mathop{\mathrm{bar}}\left(x\right) := \mathop{\mathrm{ev}}\left(x\right)
-\label{eq:doc-group1-code18-5-1}
-\end{equation}
+\begin{dmath}[number={\(\mathop{\mathrm{\%o}_{5}}\)}]
+\mathop{\mathrm{bar}}\left(x\right) \hiderel{:=} \mathop{\mathrm{ev}}\left(x\right)
+\end{dmath}
 \begin{minted}[breaklines=true]{maxima}
 (%i6) bar (xx);
 \end{minted}
-\begin{equation}
-\tag{$\mathop{\mathrm{\%o}_{6}}$}\mathop{\mathrm{zz}}
-\label{eq:doc-group1-code18-6-1}
-\end{equation}
+\begin{dmath}[number={\(\mathop{\mathrm{\%o}_{6}}\)}]
+\mathop{\mathrm{zz}}
+\end{dmath}
 
 
 \item $\mathbf{apply}$ causes the evaluation of arguments even if they are ordinarily quoted.
 \begin{minted}[breaklines=true]{maxima}
 (%i1) block (a: aa, b: bb, c: cc);
 \end{minted}
-\begin{equation}
-\tag{$\mathop{\mathrm{\%o}_{1}}$}\mathop{\mathrm{cc}}
-\label{eq:doc-group1-code19-1-1}
-\end{equation}
+\begin{dmath}[number={\(\mathop{\mathrm{\%o}_{1}}\)}]
+\mathop{\mathrm{cc}}
+\end{dmath}
 \begin{minted}[breaklines=true]{maxima}
 (%i2) block (aa: 11, bb: 22, cc: 33);
 \end{minted}
-\begin{equation}
-\tag{$\mathop{\mathrm{\%o}_{2}}$}33
-\label{eq:doc-group1-code19-2-1}
-\end{equation}
+\begin{dmath}[number={\(\mathop{\mathrm{\%o}_{2}}\)}]
+33
+\end{dmath}
 \begin{minted}[breaklines=true]{maxima}
 (%i3) [a, b, c, aa, bb, cc];
 \end{minted}
-\begin{equation}
-\tag{$\mathop{\mathrm{\%o}_{3}}$}\left[\mathop{\mathrm{aa}}, \mathop{\mathrm{bb}}, \mathop{\mathrm{cc}}, 11, 22, 33\right]
-\label{eq:doc-group1-code19-3-1}
-\end{equation}
+\begin{dmath}[number={\(\mathop{\mathrm{\%o}_{3}}\)}]
+\left[\mathop{\mathrm{aa}}, \mathop{\mathrm{bb}}, \mathop{\mathrm{cc}}, 11, 22, 33\right]
+\end{dmath}
 \begin{minted}[breaklines=true]{maxima}
 (%i4) apply (kill, [a, b, c]);
 \end{minted}
-\begin{equation}
-\tag{$\mathop{\mathrm{\%o}_{4}}$}\mathop{\mathbf{done}}
-\label{eq:doc-group1-code19-4-1}
-\end{equation}
+\begin{dmath}[number={\(\mathop{\mathrm{\%o}_{4}}\)}]
+\mathop{\mathbf{done}}
+\end{dmath}
 \begin{minted}[breaklines=true]{maxima}
 (%i5) [a, b, c, aa, bb, cc];
 \end{minted}
-\begin{equation}
-\tag{$\mathop{\mathrm{\%o}_{5}}$}\left[\mathop{\mathrm{aa}}, \mathop{\mathrm{bb}}, \mathop{\mathrm{cc}}, \mathop{\mathrm{aa}}, \mathop{\mathrm{bb}}, \mathop{\mathrm{cc}}\right]
-\label{eq:doc-group1-code19-5-1}
-\end{equation}
+\begin{dmath}[number={\(\mathop{\mathrm{\%o}_{5}}\)}]
+\left[\mathop{\mathrm{aa}}, \mathop{\mathrm{bb}}, \mathop{\mathrm{cc}}, \mathop{\mathrm{aa}}, \mathop{\mathrm{bb}}, \mathop{\mathrm{cc}}\right]
+\end{dmath}
 \begin{minted}[breaklines=true]{maxima}
 (%i6) kill (a, b, c);
 \end{minted}
-\begin{equation}
-\tag{$\mathop{\mathrm{\%o}_{6}}$}\mathop{\mathbf{done}}
-\label{eq:doc-group1-code19-6-1}
-\end{equation}
+\begin{dmath}[number={\(\mathop{\mathrm{\%o}_{6}}\)}]
+\mathop{\mathbf{done}}
+\end{dmath}
 \begin{minted}[breaklines=true]{maxima}
 (%i7) [a, b, c, aa, bb, cc];
 \end{minted}
-\begin{equation}
-\tag{$\mathop{\mathrm{\%o}_{7}}$}\left[a, b, c, \mathop{\mathrm{aa}}, \mathop{\mathrm{bb}}, \mathop{\mathrm{cc}}\right]
-\label{eq:doc-group1-code19-7-1}
-\end{equation}
+\begin{dmath}[number={\(\mathop{\mathrm{\%o}_{7}}\)}]
+\left[a, b, c, \mathop{\mathrm{aa}}, \mathop{\mathrm{bb}}, \mathop{\mathrm{cc}}\right]
+\end{dmath}
 
 
 \item $\mathbf{define}$ evaluates the body of a function definition.
 \begin{minted}[breaklines=true]{maxima}
 (%i1) integrate (sin (a*x), x, 0, %pi);
 \end{minted}
-\begin{equation}
-\tag{$\mathop{\mathrm{\%o}_{1}}$}\frac{1}{a}-\frac{\cos \left(\pi a\right)}{a}
-\label{eq:doc-group1-code20-1-1}
-\end{equation}
+\begin{dmath}[number={\(\mathop{\mathrm{\%o}_{1}}\)}]
+\frac{1}{a}-\frac{\cos \left(\pi a\right)}{a}
+\end{dmath}
 \begin{minted}[breaklines=true]{maxima}
 (%i2) foo (x) := integrate (sin (a*x), x, 0, %pi);
 \end{minted}
-\begin{equation}
-\tag{$\mathop{\mathrm{\%o}_{2}}$}\mathop{\mathrm{foo}}\left(x\right) := \int_{0}^{\pi}\sin \left(a x\right)\mathop{dx}
-\label{eq:doc-group1-code20-2-1}
-\end{equation}
+\begin{dmath}[number={\(\mathop{\mathrm{\%o}_{2}}\)}]
+\mathop{\mathrm{foo}}\left(x\right) \hiderel{:=} \int_{0}^{\pi}\sin \left(a x\right)\mathop{dx}
+\end{dmath}
 \begin{minted}[breaklines=true]{maxima}
 (%i3) define (foo (x), integrate (sin (a*x), x, 0, %pi));
 \end{minted}
-\begin{equation}
-\tag{$\mathop{\mathrm{\%o}_{3}}$}\mathop{\mathrm{foo}}\left(x\right) := \frac{1}{a}-\frac{\cos \left(\pi a\right)}{a}
-\label{eq:doc-group1-code20-3-1}
-\end{equation}
+\begin{dmath}[number={\(\mathop{\mathrm{\%o}_{3}}\)}]
+\mathop{\mathrm{foo}}\left(x\right) \hiderel{:=} \frac{1}{a}-\frac{\cos \left(\pi a\right)}{a}
+\end{dmath}
 
 
 \end{enumerate}
@@ -822,31 +751,27 @@ simplification is prevented but not evaluation.
 \begin{minted}[breaklines=true]{maxima}
 (%i1) '[1 + 1, x + x, x * x, sin (%pi)];
 \end{minted}
-\begin{equation}
-\tag{$\mathop{\mathrm{\%o}_{1}}$}\left[2, 2 x, {x}^{2}, 0\right]
-\label{eq:doc-group1-code21-1-1}
-\end{equation}
+\begin{dmath}[number={\(\mathop{\mathrm{\%o}_{1}}\)}]
+\left[2, 2 x, {x}^{2}, 0\right]
+\end{dmath}
 \begin{minted}[breaklines=true]{maxima}
 (%i2) simp: false;
 \end{minted}
-\begin{equation}
-\tag{$\mathop{\mathrm{\%o}_{2}}$}\mathop{\mathbf{false}}
-\label{eq:doc-group1-code21-2-1}
-\end{equation}
+\begin{dmath}[number={\(\mathop{\mathrm{\%o}_{2}}\)}]
+\mathop{\mathbf{false}}
+\end{dmath}
 \begin{minted}[breaklines=true]{maxima}
 (%i3) block ([x: 1], x + x);
 \end{minted}
-\begin{equation}
-\tag{$\mathop{\mathrm{\%o}_{3}}$}1+1
-\label{eq:doc-group1-code21-3-1}
-\end{equation}
+\begin{dmath}[number={\(\mathop{\mathrm{\%o}_{3}}\)}]
+1+1
+\end{dmath}
 \begin{minted}[breaklines=true]{maxima}
 (%i4) simp: true;
 \end{minted}
-\begin{equation}
-\tag{$\mathop{\mathrm{\%o}_{4}}$}\mathop{\mathbf{true}}
-\label{eq:doc-group1-code21-4-1}
-\end{equation}
+\begin{dmath}[number={\(\mathop{\mathrm{\%o}_{4}}\)}]
+\mathop{\mathbf{true}}
+\end{dmath}
 
 
 \item Some identities are not applied automatically.
@@ -856,59 +781,51 @@ are some functions which apply identities.
 \begin{minted}[breaklines=true]{maxima}
 (%i1) (a + b)^2;
 \end{minted}
-\begin{equation}
-\tag{$\mathop{\mathrm{\%o}_{1}}$}{\left(b+a\right)}^{2}
-\label{eq:doc-group1-code22-1-1}
-\end{equation}
+\begin{dmath}[number={\(\mathop{\mathrm{\%o}_{1}}\)}]
+{\left(b+a\right)}^{2}
+\end{dmath}
 \begin{minted}[breaklines=true]{maxima}
 (%i2) expand (%);
 \end{minted}
-\begin{equation}
-\tag{$\mathop{\mathrm{\%o}_{2}}$}{b}^{2}+2 a b+{a}^{2}
-\label{eq:doc-group1-code22-2-1}
-\end{equation}
+\begin{dmath}[number={\(\mathop{\mathrm{\%o}_{2}}\)}]
+{b}^{2}+2 a b+{a}^{2}
+\end{dmath}
 \begin{minted}[breaklines=true]{maxima}
 (%i3) a/b + c/b;
 \end{minted}
-\begin{equation}
-\tag{$\mathop{\mathrm{\%o}_{3}}$}\frac{c}{b}+\frac{a}{b}
-\label{eq:doc-group1-code22-3-1}
-\end{equation}
+\begin{dmath}[number={\(\mathop{\mathrm{\%o}_{3}}\)}]
+\frac{c}{b}+\frac{a}{b}
+\end{dmath}
 \begin{minted}[breaklines=true]{maxima}
 (%i4) ratsimp (%);
 \end{minted}
-\begin{equation}
-\tag{$\mathop{\mathrm{\%o}_{4}}$}\frac{c+a}{b}
-\label{eq:doc-group1-code22-4-1}
-\end{equation}
+\begin{dmath}[number={\(\mathop{\mathrm{\%o}_{4}}\)}]
+\frac{c+a}{b}
+\end{dmath}
 \begin{minted}[breaklines=true]{maxima}
 (%i5) sin (2*x);
 \end{minted}
-\begin{equation}
-\tag{$\mathop{\mathrm{\%o}_{5}}$}\sin \left(2 x\right)
-\label{eq:doc-group1-code22-5-1}
-\end{equation}
+\begin{dmath}[number={\(\mathop{\mathrm{\%o}_{5}}\)}]
+\sin \left(2 x\right)
+\end{dmath}
 \begin{minted}[breaklines=true]{maxima}
 (%i6) trigexpand (%);
 \end{minted}
-\begin{equation}
-\tag{$\mathop{\mathrm{\%o}_{6}}$}2 \cos x \sin x
-\label{eq:doc-group1-code22-6-1}
-\end{equation}
+\begin{dmath}[number={\(\mathop{\mathrm{\%o}_{6}}\)}]
+2 \cos x \sin x
+\end{dmath}
 \begin{minted}[breaklines=true]{maxima}
 (%i7) a * exp (b * %i);
 \end{minted}
-\begin{equation}
-\tag{$\mathop{\mathrm{\%o}_{7}}$}a {e}^{i b}
-\label{eq:doc-group1-code22-7-1}
-\end{equation}
+\begin{dmath}[number={\(\mathop{\mathrm{\%o}_{7}}\)}]
+a {e}^{i b}
+\end{dmath}
 \begin{minted}[breaklines=true]{maxima}
 (%i8) demoivre (%);
 \end{minted}
-\begin{equation}
-\tag{$\mathop{\mathrm{\%o}_{8}}$}a \left(i \sin b+\cos b\right)
-\label{eq:doc-group1-code22-8-1}
-\end{equation}
+\begin{dmath}[number={\(\mathop{\mathrm{\%o}_{8}}\)}]
+a \left(i \sin b+\cos b\right)
+\end{dmath}
 
 
 \end{enumerate}
@@ -922,24 +839,21 @@ The arguments of the expression are always evaluated (even if they wouldn't be o
 \begin{minted}[breaklines=true]{maxima}
 (%i1) apply (sin, [x * %pi]);
 \end{minted}
-\begin{equation}
-\tag{$\mathop{\mathrm{\%o}_{1}}$}\sin \left(\pi x\right)
-\label{eq:doc-group1-code23-1-1}
-\end{equation}
+\begin{dmath}[number={\(\mathop{\mathrm{\%o}_{1}}\)}]
+\sin \left(\pi x\right)
+\end{dmath}
 \begin{minted}[breaklines=true]{maxima}
 (%i2) L: [a, b, c, x, y, z];
 \end{minted}
-\begin{equation}
-\tag{$\mathop{\mathrm{\%o}_{2}}$}\left[a, b, c, x, y, z\right]
-\label{eq:doc-group1-code23-2-1}
-\end{equation}
+\begin{dmath}[number={\(\mathop{\mathrm{\%o}_{2}}\)}]
+\left[a, b, c, x, y, z\right]
+\end{dmath}
 \begin{minted}[breaklines=true]{maxima}
 (%i3) apply ("+", L);
 \end{minted}
-\begin{equation}
-\tag{$\mathop{\mathrm{\%o}_{3}}$}z+y+x+c+b+a
-\label{eq:doc-group1-code23-3-1}
-\end{equation}
+\begin{dmath}[number={\(\mathop{\mathrm{\%o}_{3}}\)}]
+z+y+x+c+b+a
+\end{dmath}
 
 
 \item $\mathbf{map}$ constructs and evaluates an expression for each item in a list of arguments.
@@ -948,24 +862,21 @@ The result is a list.
 \begin{minted}[breaklines=true]{maxima}
 (%i1) map (foo, [x, y, z]);
 \end{minted}
-\begin{equation}
-\tag{$\mathop{\mathrm{\%o}_{1}}$}\left[\mathop{\mathrm{foo}}\left(x\right), \mathop{\mathrm{foo}}\left(y\right), \mathop{\mathrm{foo}}\left(z\right)\right]
-\label{eq:doc-group1-code24-1-1}
-\end{equation}
+\begin{dmath}[number={\(\mathop{\mathrm{\%o}_{1}}\)}]
+\left[\mathop{\mathrm{foo}}\left(x\right), \mathop{\mathrm{foo}}\left(y\right), \mathop{\mathrm{foo}}\left(z\right)\right]
+\end{dmath}
 \begin{minted}[breaklines=true]{maxima}
 (%i2) map ("+", [1, 2, 3], [a, b, c]);
 \end{minted}
-\begin{equation}
-\tag{$\mathop{\mathrm{\%o}_{2}}$}\left[a+1, b+2, c+3\right]
-\label{eq:doc-group1-code24-2-1}
-\end{equation}
+\begin{dmath}[number={\(\mathop{\mathrm{\%o}_{2}}\)}]
+\left[a+1, b+2, c+3\right]
+\end{dmath}
 \begin{minted}[breaklines=true]{maxima}
 (%i3) map (atom, [a, b, c, a + b, a + b + c]);
 \end{minted}
-\begin{equation}
-\tag{$\mathop{\mathrm{\%o}_{3}}$}\left[\mathop{\mathbf{true}}, \mathop{\mathbf{true}}, \mathop{\mathbf{true}}, \mathop{\mathbf{false}}, \mathop{\mathbf{false}}\right]
-\label{eq:doc-group1-code24-3-1}
-\end{equation}
+\begin{dmath}[number={\(\mathop{\mathrm{\%o}_{3}}\)}]
+\left[\mathop{\mathbf{true}}, \mathop{\mathbf{true}}, \mathop{\mathbf{true}}, \mathop{\mathbf{false}}, \mathop{\mathbf{false}}\right]
+\end{dmath}
 
 
 \item $\mathbf{lambda}$ constructs a lambda expression (i.e., an unnamed function).
@@ -974,45 +885,39 @@ $\mathbf{lambda}$ does not evaluate the function body.
 \begin{minted}[breaklines=true]{maxima}
 (%i1) f: lambda ([x, y], (x + y)*(x - y));
 \end{minted}
-\begin{equation}
-\tag{$\mathop{\mathrm{\%o}_{1}}$}\lambda\left(\left[x, y\right], \left(x+y\right) \left(x-y\right)\right)
-\label{eq:doc-group1-code25-1-1}
-\end{equation}
+\begin{dmath}[number={\(\mathop{\mathrm{\%o}_{1}}\)}]
+\lambda\left(\left[x, y\right], \left(x+y\right) \left(x-y\right)\right)
+\end{dmath}
 \begin{minted}[breaklines=true]{maxima}
 (%i2) f (a, b);
 \end{minted}
-\begin{equation}
-\tag{$\mathop{\mathrm{\%o}_{2}}$}\left(a-b\right) \left(b+a\right)
-\label{eq:doc-group1-code25-2-1}
-\end{equation}
+\begin{dmath}[number={\(\mathop{\mathrm{\%o}_{2}}\)}]
+\left(a-b\right) \left(b+a\right)
+\end{dmath}
 \begin{minted}[breaklines=true]{maxima}
 (%i3) apply (f, [p, q]);
 \end{minted}
-\begin{equation}
-\tag{$\mathop{\mathrm{\%o}_{3}}$}\left(p-q\right) \left(q+p\right)
-\label{eq:doc-group1-code25-3-1}
-\end{equation}
+\begin{dmath}[number={\(\mathop{\mathrm{\%o}_{3}}\)}]
+\left(p-q\right) \left(q+p\right)
+\end{dmath}
 \begin{minted}[breaklines=true]{maxima}
 (%i4) map (f, [1, 2, 3], [a, b, c]);
 \end{minted}
-\begin{equation}
-\tag{$\mathop{\mathrm{\%o}_{4}}$}\left[\left(1-a\right) \left(a+1\right), \left(2-b\right) \left(b+2\right), \left(3-c\right) \left(c+3\right)\right]
-\label{eq:doc-group1-code25-4-1}
-\end{equation}
+\begin{dmath}[number={\(\mathop{\mathrm{\%o}_{4}}\)}]
+\left[\left(1-a\right) \left(a+1\right), \left(2-b\right) \left(b+2\right), \left(3-c\right) \left(c+3\right)\right]
+\end{dmath}
 \begin{minted}[breaklines=true]{maxima}
 (%i5) apply (lambda ([x, y], (x + y)*(x - y)), [p, q]);
 \end{minted}
-\begin{equation}
-\tag{$\mathop{\mathrm{\%o}_{5}}$}\left(p-q\right) \left(q+p\right)
-\label{eq:doc-group1-code25-5-1}
-\end{equation}
+\begin{dmath}[number={\(\mathop{\mathrm{\%o}_{5}}\)}]
+\left(p-q\right) \left(q+p\right)
+\end{dmath}
 \begin{minted}[breaklines=true]{maxima}
 (%i6) map (lambda ([x, y], (x + y)*(x - y)), [1, 2, 3], [a, b, c]);
 \end{minted}
-\begin{equation}
-\tag{$\mathop{\mathrm{\%o}_{6}}$}\left[\left(1-a\right) \left(a+1\right), \left(2-b\right) \left(b+2\right), \left(3-c\right) \left(c+3\right)\right]
-\label{eq:doc-group1-code25-6-1}
-\end{equation}
+\begin{dmath}[number={\(\mathop{\mathrm{\%o}_{6}}\)}]
+\left[\left(1-a\right) \left(a+1\right), \left(2-b\right) \left(b+2\right), \left(3-c\right) \left(c+3\right)\right]
+\end{dmath}
 
 
 \end{enumerate}
@@ -1104,17 +1009,15 @@ for $\mathbf{foo} (1)$ Maxima attempts to evaluate $\mathbf{diff} (\mathbf{sin}(
 \begin{minted}[breaklines=true]{maxima}
 (%i1) foo (x) := diff (sin(x)^2, x);
 \end{minted}
-\begin{equation}
-\tag{$\mathop{\mathrm{\%o}_{1}}$}\mathop{\mathrm{foo}}\left(x\right) := \frac{d}{d x}\sin^{2} x
-\label{eq:doc-group1-code26-1-1}
-\end{equation}
+\begin{dmath}[number={\(\mathop{\mathrm{\%o}_{1}}\)}]
+\mathop{\mathrm{foo}}\left(x\right) \hiderel{:=} \frac{d}{d x}\sin^{2} x
+\end{dmath}
 \begin{minted}[breaklines=true]{maxima}
 (%i2) foo (u);
 \end{minted}
-\begin{equation}
-\tag{$\mathop{\mathrm{\%o}_{2}}$}2 \cos u \sin u
-\label{eq:doc-group1-code26-2-1}
-\end{equation}
+\begin{dmath}[number={\(\mathop{\mathrm{\%o}_{2}}\)}]
+2 \cos u \sin u
+\end{dmath}
 \begin{minted}[breaklines=true]{maxima}
 (%i3) foo (1);
 \end{minted}
@@ -1135,24 +1038,21 @@ $\mathbf{foo} (1)$ is OK now.
 \begin{minted}[breaklines=true]{maxima}
 (%i1) define (foo (x), diff (sin(x)^2, x));
 \end{minted}
-\begin{equation}
-\tag{$\mathop{\mathrm{\%o}_{1}}$}\mathop{\mathrm{foo}}\left(x\right) := 2 \cos x \sin x
-\label{eq:doc-group1-code27-1-1}
-\end{equation}
+\begin{dmath}[number={\(\mathop{\mathrm{\%o}_{1}}\)}]
+\mathop{\mathrm{foo}}\left(x\right) \hiderel{:=} 2 \cos x \sin x
+\end{dmath}
 \begin{minted}[breaklines=true]{maxima}
 (%i2) foo (u);
 \end{minted}
-\begin{equation}
-\tag{$\mathop{\mathrm{\%o}_{2}}$}2 \cos u \sin u
-\label{eq:doc-group1-code27-2-1}
-\end{equation}
+\begin{dmath}[number={\(\mathop{\mathrm{\%o}_{2}}\)}]
+2 \cos u \sin u
+\end{dmath}
 \begin{minted}[breaklines=true]{maxima}
 (%i3) foo (1);
 \end{minted}
-\begin{equation}
-\tag{$\mathop{\mathrm{\%o}_{3}}$}2 \cos 1 \sin 1
-\label{eq:doc-group1-code27-3-1}
-\end{equation}
+\begin{dmath}[number={\(\mathop{\mathrm{\%o}_{3}}\)}]
+2 \cos 1 \sin 1
+\end{dmath}
 
 
 \end{enumerate}
@@ -1161,45 +1061,39 @@ $\mathbf{foo} (1)$ is OK now.
 \begin{minted}[breaklines=true]{maxima}
 (%i1) eq_1: a * x + b * y + z = %pi;
 \end{minted}
-\begin{equation}
-\tag{$\mathop{\mathrm{\%o}_{1}}$}z+b y+a x = \pi
-\label{eq:doc-group1-code28-1-1}
-\end{equation}
+\begin{dmath}[number={\(\mathop{\mathrm{\%o}_{1}}\)}]
+z+b y+a x = \pi
+\end{dmath}
 \begin{minted}[breaklines=true]{maxima}
 (%i2) eq_2: z - 5*y + x = 0;
 \end{minted}
-\begin{equation}
-\tag{$\mathop{\mathrm{\%o}_{2}}$}z-5 y+x = 0
-\label{eq:doc-group1-code28-2-1}
-\end{equation}
+\begin{dmath}[number={\(\mathop{\mathrm{\%o}_{2}}\)}]
+z-5 y+x = 0
+\end{dmath}
 \begin{minted}[breaklines=true]{maxima}
 (%i3) s: solve ([eq_1, eq_2], [x, z]);
 \end{minted}
-\begin{equation}
-\tag{$\mathop{\mathrm{\%o}_{3}}$}\left[\left[x = -\frac{\left(b+5\right) y-\pi}{a-1}, z = \frac{\left(b+5 a\right) y-\pi}{a-1}\right]\right]
-\label{eq:doc-group1-code28-3-1}
-\end{equation}
+\begin{dmath}[number={\(\mathop{\mathrm{\%o}_{3}}\)}]
+\left[\left[x = -\frac{\left(b+5\right) y-\pi}{a-1}, z = \frac{\left(b+5 a\right) y-\pi}{a-1}\right]\right]
+\end{dmath}
 \begin{minted}[breaklines=true]{maxima}
 (%i4) length (s);
 \end{minted}
-\begin{equation}
-\tag{$\mathop{\mathrm{\%o}_{4}}$}1
-\label{eq:doc-group1-code28-4-1}
-\end{equation}
+\begin{dmath}[number={\(\mathop{\mathrm{\%o}_{4}}\)}]
+1
+\end{dmath}
 \begin{minted}[breaklines=true]{maxima}
 (%i5) [subst (s[1], eq_1), subst (s[1], eq_2)];
 \end{minted}
-\begin{equation}
-\tag{$\mathop{\mathrm{\%o}_{5}}$}\left[\frac{\left(b+5 a\right) y-\pi}{a-1}-\frac{a \left(\left(b+5\right) y-\pi\right)}{a-1}+b y = \pi, \frac{\left(b+5 a\right) y-\pi}{a-1}-\frac{\left(b+5\right) y-\pi}{a-1}-5 y = 0\right]
-\label{eq:doc-group1-code28-5-1}
-\end{equation}
+\begin{dmath}[number={\(\mathop{\mathrm{\%o}_{5}}\)}]
+\left[\frac{\left(b+5 a\right) y-\pi}{a-1}-\frac{a \left(\left(b+5\right) y-\pi\right)}{a-1}+b y = \pi, \frac{\left(b+5 a\right) y-\pi}{a-1}-\frac{\left(b+5\right) y-\pi}{a-1}-5 y = 0\right]
+\end{dmath}
 \begin{minted}[breaklines=true]{maxima}
 (%i6) ratsimp (%);
 \end{minted}
-\begin{equation}
-\tag{$\mathop{\mathrm{\%o}_{6}}$}\left[\pi = \pi, 0 = 0\right]
-\label{eq:doc-group1-code28-6-1}
-\end{equation}
+\begin{dmath}[number={\(\mathop{\mathrm{\%o}_{6}}\)}]
+\left[\pi = \pi, 0 = 0\right]
+\end{dmath}
 
 
 \subsection{Integrate and differentiate}
@@ -1208,90 +1102,78 @@ $\mathbf{integrate}$ computes definite and indefinite integrals.
 \begin{minted}[breaklines=true]{maxima}
 (%i1) integrate (1/(1 + x), x, 0, 1);
 \end{minted}
-\begin{equation}
-\tag{$\mathop{\mathrm{\%o}_{1}}$}\ln 2
-\label{eq:doc-group1-code29-1-1}
-\end{equation}
+\begin{dmath}[number={\(\mathop{\mathrm{\%o}_{1}}\)}]
+\ln 2
+\end{dmath}
 \begin{minted}[breaklines=true]{maxima}
 (%i2) integrate (exp(-u) * sin(u), u, 0, inf);
 \end{minted}
-\begin{equation}
-\tag{$\mathop{\mathrm{\%o}_{2}}$}\frac{1}{2}
-\label{eq:doc-group1-code29-2-1}
-\end{equation}
+\begin{dmath}[number={\(\mathop{\mathrm{\%o}_{2}}\)}]
+\frac{1}{2}
+\end{dmath}
 \begin{minted}[breaklines=true]{maxima}
 (%i3) assume (a > 0);
 \end{minted}
-\begin{equation}
-\tag{$\mathop{\mathrm{\%o}_{3}}$}\left[a > 0\right]
-\label{eq:doc-group1-code29-3-1}
-\end{equation}
+\begin{dmath}[number={\(\mathop{\mathrm{\%o}_{3}}\)}]
+\left[a > 0\right]
+\end{dmath}
 \begin{minted}[breaklines=true]{maxima}
 (%i4) integrate (1/(1 + x), x, 0, a);
 \end{minted}
-\begin{equation}
-\tag{$\mathop{\mathrm{\%o}_{4}}$}\ln \left(a+1\right)
-\label{eq:doc-group1-code29-4-1}
-\end{equation}
+\begin{dmath}[number={\(\mathop{\mathrm{\%o}_{4}}\)}]
+\ln \left(a+1\right)
+\end{dmath}
 \begin{minted}[breaklines=true]{maxima}
 (%i5) integrate (exp(-a*u) * sin(a*u), u, 0, inf);
 \end{minted}
-\begin{equation}
-\tag{$\mathop{\mathrm{\%o}_{5}}$}\frac{1}{2 a}
-\label{eq:doc-group1-code29-5-1}
-\end{equation}
+\begin{dmath}[number={\(\mathop{\mathrm{\%o}_{5}}\)}]
+\frac{1}{2 a}
+\end{dmath}
 \begin{minted}[breaklines=true]{maxima}
 (%i6) integrate (exp (sin (t)), t, 0, %pi);
 \end{minted}
-\begin{equation}
-\tag{$\mathop{\mathrm{\%o}_{6}}$}\int_{0}^{\pi}{e}^{\sin t}\mathop{dt}
-\label{eq:doc-group1-code29-6-1}
-\end{equation}
+\begin{dmath}[number={\(\mathop{\mathrm{\%o}_{6}}\)}]
+\int_{0}^{\pi}{e}^{\sin t}\mathop{dt}
+\end{dmath}
 \begin{minted}[breaklines=true]{maxima}
 (%i7) 'integrate (exp(-u) * sin(u), u, 0, inf);
 \end{minted}
-\begin{equation}
-\tag{$\mathop{\mathrm{\%o}_{7}}$}\int_{0}^{\infty}{e}^{-u} \sin u\mathop{du}
-\label{eq:doc-group1-code29-7-1}
-\end{equation}
+\begin{dmath}[number={\(\mathop{\mathrm{\%o}_{7}}\)}]
+\int_{0}^{\infty}{e}^{-u} \sin u\mathop{du}
+\end{dmath}
 
 
 $\mathbf{diff}$ computes derivatives.
 \begin{minted}[breaklines=true]{maxima}
 (%i1) diff (sin (y*x));
 \end{minted}
-\begin{equation}
-\tag{$\mathop{\mathrm{\%o}_{1}}$}x \cos \left(x y\right) \mathop{dy}+y \cos \left(x y\right) \mathop{dx}
-\label{eq:doc-group1-code30-1-1}
-\end{equation}
+\begin{dmath}[number={\(\mathop{\mathrm{\%o}_{1}}\)}]
+x \cos \left(x y\right) \mathop{dy}+y \cos \left(x y\right) \mathop{dx}
+\end{dmath}
 \begin{minted}[breaklines=true]{maxima}
 (%i2) diff (sin (y*x), x);
 \end{minted}
-\begin{equation}
-\tag{$\mathop{\mathrm{\%o}_{2}}$}y \cos \left(x y\right)
-\label{eq:doc-group1-code30-2-1}
-\end{equation}
+\begin{dmath}[number={\(\mathop{\mathrm{\%o}_{2}}\)}]
+y \cos \left(x y\right)
+\end{dmath}
 \begin{minted}[breaklines=true]{maxima}
 (%i3) diff (sin (y*x), y);
 \end{minted}
-\begin{equation}
-\tag{$\mathop{\mathrm{\%o}_{3}}$}x \cos \left(x y\right)
-\label{eq:doc-group1-code30-3-1}
-\end{equation}
+\begin{dmath}[number={\(\mathop{\mathrm{\%o}_{3}}\)}]
+x \cos \left(x y\right)
+\end{dmath}
 \begin{minted}[breaklines=true]{maxima}
 (%i4) diff (sin (y*x), x, 2);
 \end{minted}
-\begin{equation}
-\tag{$\mathop{\mathrm{\%o}_{4}}$}-{y}^{2} \sin \left(x y\right)
-\label{eq:doc-group1-code30-4-1}
-\end{equation}
+\begin{dmath}[number={\(\mathop{\mathrm{\%o}_{4}}\)}]
+-{y}^{2} \sin \left(x y\right)
+\end{dmath}
 \begin{minted}[breaklines=true]{maxima}
 (%i5) 'diff (sin (y*x), x, 2);
 \end{minted}
-\begin{equation}
-\tag{$\mathop{\mathrm{\%o}_{5}}$}\frac{{d}^{2}}{d {x}^{2}}\sin \left(x y\right)
-\label{eq:doc-group1-code30-5-1}
-\end{equation}
+\begin{dmath}[number={\(\mathop{\mathrm{\%o}_{5}}\)}]
+\frac{{d}^{2}}{d {x}^{2}}\sin \left(x y\right)
+\end{dmath}
 
 
 \subsection{Make a plot}
@@ -1301,48 +1183,42 @@ $\mathbf{plot2d}$ draws two-dimensional graphs.
 (%i1) plot2d (exp(-u) * sin(u), [u, 0, 2*%pi]);
 \end{minted}
 \includegraphics[width=\linewidth]{./figure/doc-group1-code31-1-1.pdf}
-\begin{equation}
-\tag{$\mathop{\mathrm{\%o}_{1}}$}\left[\mbox{"/tmp/maxout14883.gnuplot"}, \mbox{"/tmp/m.pdf"}\right]
-\label{eq:doc-group1-code31-1-1}
-\end{equation}
+\begin{dmath}[number={\(\mathop{\mathrm{\%o}_{1}}\)}]
+\left[\mbox{"/tmp/maxout22736.gnuplot"}, \mbox{"/tmp/m.pdf"}\right]
+\end{dmath}
 \begin{minted}[breaklines=true]{maxima}
 (%i2) plot2d ([exp(-u), exp(-u) * sin(u)], [u, 0, 2*%pi]);
 \end{minted}
 \includegraphics[width=\linewidth]{./figure/doc-group1-code31-2-1.pdf}
-\begin{equation}
-\tag{$\mathop{\mathrm{\%o}_{2}}$}\left[\mbox{"/tmp/maxout14883.gnuplot"}, \mbox{"/tmp/m.pdf"}\right]
-\label{eq:doc-group1-code31-2-1}
-\end{equation}
+\begin{dmath}[number={\(\mathop{\mathrm{\%o}_{2}}\)}]
+\left[\mbox{"/tmp/maxout22736.gnuplot"}, \mbox{"/tmp/m.pdf"}\right]
+\end{dmath}
 \begin{minted}[breaklines=true]{maxima}
 (%i3) xx: makelist (i/2.5, i, 1, 10);
 \end{minted}
-\begin{equation}
-\tag{$\mathop{\mathrm{\%o}_{3}}$}\left[0.4, 0.8, 1.2, 1.6, 2.0, 2.4, 2.8, 3.2, 3.6, 4.0\right]
-\label{eq:doc-group1-code31-3-1}
-\end{equation}
+\begin{dmath}[number={\(\mathop{\mathrm{\%o}_{3}}\)}]
+\left[0.4, 0.8, 1.2, 1.6, 2.0, 2.4, 2.8, 3.2, 3.6, 4.0\right]
+\end{dmath}
 \begin{minted}[breaklines=true]{maxima}
 (%i4) yy: map (lambda ([x], exp(-x) * sin(x)), xx);
 \end{minted}
-\begin{equation}
-\tag{$\mathop{\mathrm{\%o}_{4}}$}\left[0.261034921143457, 0.322328869227062, 0.2807247779692679, 0.20181042993345175, 0.12306002480577674, 0.06127663726195732, 0.020370650389686513, -0.0023794587414574246, -0.012091305769841415, -0.013861321214152955\right]
-\label{eq:doc-group1-code31-4-1}
-\end{equation}
+\begin{dmath}[number={\(\mathop{\mathrm{\%o}_{4}}\)}]
+\left[0.261034921143457, 0.322328869227062, 0.2807247779692679, 0.20181042993345175, 0.12306002480577674, 0.06127663726195732, 0.020370650389686513, -0.0023794587414574246, -0.012091305769841415, -0.013861321214152955\right]
+\end{dmath}
 \begin{minted}[breaklines=true]{maxima}
 (%i5) plot2d ([discrete, xx, yy]);
 \end{minted}
 \includegraphics[width=\linewidth]{./figure/doc-group1-code31-5-1.pdf}
-\begin{equation}
-\tag{$\mathop{\mathrm{\%o}_{5}}$}\left[\mbox{"/tmp/maxout14883.gnuplot"}, \mbox{"/tmp/m.pdf"}\right]
-\label{eq:doc-group1-code31-5-1}
-\end{equation}
+\begin{dmath}[number={\(\mathop{\mathrm{\%o}_{5}}\)}]
+\left[\mbox{"/tmp/maxout22736.gnuplot"}, \mbox{"/tmp/m.pdf"}\right]
+\end{dmath}
 \begin{minted}[breaklines=true]{maxima}
 (%i6) plot2d ([discrete, xx, yy], [style, points]);
 \end{minted}
 \includegraphics[width=\linewidth]{./figure/doc-group1-code31-6-1.pdf}
-\begin{equation}
-\tag{$\mathop{\mathrm{\%o}_{6}}$}\left[\mbox{"/tmp/maxout14883.gnuplot"}, \mbox{"/tmp/m.pdf"}\right]
-\label{eq:doc-group1-code31-6-1}
-\end{equation}
+\begin{dmath}[number={\(\mathop{\mathrm{\%o}_{6}}\)}]
+\left[\mbox{"/tmp/maxout22736.gnuplot"}, \mbox{"/tmp/m.pdf"}\right]
+\end{dmath}
 
 
 See also $\mathbf{plot3d}$.
@@ -1353,55 +1229,48 @@ $\mathbf{save}$ writes expressions to a file.
 \begin{minted}[breaklines=true]{maxima}
 (%i1) a: foo - bar;
 \end{minted}
-\begin{equation}
-\tag{$\mathop{\mathrm{\%o}_{1}}$}\mathop{\mathrm{foo}}-\mathop{\mathrm{bar}}
-\label{eq:doc-group1-code32-1-1}
-\end{equation}
+\begin{dmath}[number={\(\mathop{\mathrm{\%o}_{1}}\)}]
+\mathop{\mathrm{foo}}-\mathop{\mathrm{bar}}
+\end{dmath}
 \begin{minted}[breaklines=true]{maxima}
 (%i2) b: foo^2 * bar;
 \end{minted}
-\begin{equation}
-\tag{$\mathop{\mathrm{\%o}_{2}}$}\mathop{\mathrm{bar}} {\mathop{\mathrm{foo}}}^{2}
-\label{eq:doc-group1-code32-2-1}
-\end{equation}
+\begin{dmath}[number={\(\mathop{\mathrm{\%o}_{2}}\)}]
+\mathop{\mathrm{bar}} {\mathop{\mathrm{foo}}}^{2}
+\end{dmath}
 \begin{minted}[breaklines=true]{maxima}
 (%i3) save ("my.session", a, b);
 \end{minted}
-\begin{equation}
-\tag{$\mathop{\mathrm{\%o}_{3}}$}\mbox{"/home/yitzi/Documents/git/metys-examples/minimal-maxima/my.session"}
-\label{eq:doc-group1-code32-3-1}
-\end{equation}
+\begin{dmath}[number={\(\mathop{\mathrm{\%o}_{3}}\)}]
+\mbox{"/home/tburton/Documents/git/metys-examples/minimal-maxima/my.session"}
+\end{dmath}
 \begin{minted}[breaklines=true]{maxima}
 (%i4) save ("my.session", all);
 \end{minted}
-\begin{equation}
-\tag{$\mathop{\mathrm{\%o}_{4}}$}\mbox{"/home/yitzi/Documents/git/metys-examples/minimal-maxima/my.session"}
-\label{eq:doc-group1-code32-4-1}
-\end{equation}
+\begin{dmath}[number={\(\mathop{\mathrm{\%o}_{4}}\)}]
+\mbox{"/home/tburton/Documents/git/metys-examples/minimal-maxima/my.session"}
+\end{dmath}
 
 
 $\mathbf{load}$ reads expressions from a file.
 \begin{minted}[breaklines=true]{maxima}
 (%i5) load ("my.session");
 \end{minted}
-\begin{equation}
-\tag{$\mathop{\mathrm{\%o}_{4}}$}\mbox{"my.session"}
-\label{eq:doc-group1-code33-1-1}
-\end{equation}
+\begin{dmath}[number={\(\mathop{\mathrm{\%o}_{4}}\)}]
+\mbox{"my.session"}
+\end{dmath}
 \begin{minted}[breaklines=true]{maxima}
 (%i6) a;
 \end{minted}
-\begin{equation}
-\tag{$\mathop{\mathrm{\%o}_{5}}$}\mathop{\mathrm{foo}}-\mathop{\mathrm{bar}}
-\label{eq:doc-group1-code33-2-1}
-\end{equation}
+\begin{dmath}[number={\(\mathop{\mathrm{\%o}_{5}}\)}]
+\mathop{\mathrm{foo}}-\mathop{\mathrm{bar}}
+\end{dmath}
 \begin{minted}[breaklines=true]{maxima}
 (%i7) b;
 \end{minted}
-\begin{equation}
-\tag{$\mathop{\mathrm{\%o}_{6}}$}\mathop{\mathrm{bar}} {\mathop{\mathrm{foo}}}^{2}
-\label{eq:doc-group1-code33-3-1}
-\end{equation}
+\begin{dmath}[number={\(\mathop{\mathrm{\%o}_{6}}\)}]
+\mathop{\mathrm{bar}} {\mathop{\mathrm{foo}}}^{2}
+\end{dmath}
 
 
 See also $\mathbf{stringout}$ and $\mathbf{batch}$.
@@ -1446,45 +1315,39 @@ Functions, lambda expressions, and blocks can have local variables.
 \begin{minted}[breaklines=true]{maxima}
 (%i1) (x: 42, y: 1729, z: foo*bar);
 \end{minted}
-\begin{equation}
-\tag{$\mathop{\mathrm{\%o}_{1}}$}\mathop{\mathrm{bar}} \mathop{\mathrm{foo}}
-\label{eq:doc-group1-code34-1-1}
-\end{equation}
+\begin{dmath}[number={\(\mathop{\mathrm{\%o}_{1}}\)}]
+\mathop{\mathrm{bar}} \mathop{\mathrm{foo}}
+\end{dmath}
 \begin{minted}[breaklines=true]{maxima}
 (%i2) f (x, y) := x*y*z;
 \end{minted}
-\begin{equation}
-\tag{$\mathop{\mathrm{\%o}_{2}}$}f\left(x, y\right) := x y z
-\label{eq:doc-group1-code34-2-1}
-\end{equation}
+\begin{dmath}[number={\(\mathop{\mathrm{\%o}_{2}}\)}]
+f\left(x, y\right) \hiderel{:=} x y z
+\end{dmath}
 \begin{minted}[breaklines=true]{maxima}
 (%i3) f (aa, bb);
 \end{minted}
-\begin{equation}
-\tag{$\mathop{\mathrm{\%o}_{3}}$}\mathop{\mathrm{aa}} \mathop{\mathrm{bar}} \mathop{\mathrm{bb}} \mathop{\mathrm{foo}}
-\label{eq:doc-group1-code34-3-1}
-\end{equation}
+\begin{dmath}[number={\(\mathop{\mathrm{\%o}_{3}}\)}]
+\mathop{\mathrm{aa}} \mathop{\mathrm{bar}} \mathop{\mathrm{bb}} \mathop{\mathrm{foo}}
+\end{dmath}
 \begin{minted}[breaklines=true]{maxima}
 (%i4) lambda ([x, z], (x - z)/y);
 \end{minted}
-\begin{equation}
-\tag{$\mathop{\mathrm{\%o}_{4}}$}\lambda\left(\left[x, z\right], \frac{x-z}{y}\right)
-\label{eq:doc-group1-code34-4-1}
-\end{equation}
+\begin{dmath}[number={\(\mathop{\mathrm{\%o}_{4}}\)}]
+\lambda\left(\left[x, z\right], \frac{x-z}{y}\right)
+\end{dmath}
 \begin{minted}[breaklines=true]{maxima}
 (%i5) apply (%, [uu, vv]);
 \end{minted}
-\begin{equation}
-\tag{$\mathop{\mathrm{\%o}_{5}}$}\frac{\mathop{\mathrm{uu}}-\mathop{\mathrm{vv}}}{1729}
-\label{eq:doc-group1-code34-5-1}
-\end{equation}
+\begin{dmath}[number={\(\mathop{\mathrm{\%o}_{5}}\)}]
+\frac{\mathop{\mathrm{uu}}-\mathop{\mathrm{vv}}}{1729}
+\end{dmath}
 \begin{minted}[breaklines=true]{maxima}
 (%i6) block ([y, z], y: 65536, [x, y, z]);
 \end{minted}
-\begin{equation}
-\tag{$\mathop{\mathrm{\%o}_{6}}$}\left[42, 65536, z\right]
-\label{eq:doc-group1-code34-6-1}
-\end{equation}
+\begin{dmath}[number={\(\mathop{\mathrm{\%o}_{6}}\)}]
+\left[42, 65536, z\right]
+\end{dmath}
 
 
 \item The value of a variable is whatever was assigned most recently,
@@ -1493,45 +1356,39 @@ either by explicit assignment or by assignment of a value to a local variable.
 \begin{minted}[breaklines=true]{maxima}
 (%i1) foo (y) := x - y;
 \end{minted}
-\begin{equation}
-\tag{$\mathop{\mathrm{\%o}_{1}}$}\mathop{\mathrm{foo}}\left(y\right) := x-y
-\label{eq:doc-group1-code35-1-1}
-\end{equation}
+\begin{dmath}[number={\(\mathop{\mathrm{\%o}_{1}}\)}]
+\mathop{\mathrm{foo}}\left(y\right) \hiderel{:=} x-y
+\end{dmath}
 \begin{minted}[breaklines=true]{maxima}
 (%i2) x: 1729;
 \end{minted}
-\begin{equation}
-\tag{$\mathop{\mathrm{\%o}_{2}}$}1729
-\label{eq:doc-group1-code35-2-1}
-\end{equation}
+\begin{dmath}[number={\(\mathop{\mathrm{\%o}_{2}}\)}]
+1729
+\end{dmath}
 \begin{minted}[breaklines=true]{maxima}
 (%i3) foo (%pi);
 \end{minted}
-\begin{equation}
-\tag{$\mathop{\mathrm{\%o}_{3}}$}1729-\pi
-\label{eq:doc-group1-code35-3-1}
-\end{equation}
+\begin{dmath}[number={\(\mathop{\mathrm{\%o}_{3}}\)}]
+1729-\pi
+\end{dmath}
 \begin{minted}[breaklines=true]{maxima}
 (%i4) bar (x) := foo (%e);
 \end{minted}
-\begin{equation}
-\tag{$\mathop{\mathrm{\%o}_{4}}$}\mathop{\mathrm{bar}}\left(x\right) := \mathop{\mathrm{foo}}\left(e\right)
-\label{eq:doc-group1-code35-4-1}
-\end{equation}
+\begin{dmath}[number={\(\mathop{\mathrm{\%o}_{4}}\)}]
+\mathop{\mathrm{bar}}\left(x\right) \hiderel{:=} \mathop{\mathrm{foo}}\left(e\right)
+\end{dmath}
 \begin{minted}[breaklines=true]{maxima}
 (%i5) bar (42);
 \end{minted}
-\begin{equation}
-\tag{$\mathop{\mathrm{\%o}_{5}}$}42-e
-\label{eq:doc-group1-code35-5-1}
-\end{equation}
+\begin{dmath}[number={\(\mathop{\mathrm{\%o}_{5}}\)}]
+42-e
+\end{dmath}
 \begin{minted}[breaklines=true]{maxima}
 (%i6) bar ('u);
 \end{minted}
-\begin{equation}
-\tag{$\mathop{\mathrm{\%o}_{6}}$}u-e
-\label{eq:doc-group1-code35-6-1}
-\end{equation}
+\begin{dmath}[number={\(\mathop{\mathrm{\%o}_{6}}\)}]
+u-e
+\end{dmath}
 
 
 \end{enumerate}
@@ -1574,10 +1431,9 @@ to evaluate $\mathit{expr}$.
 \begin{minted}[breaklines=true]{maxima}
 (%i1) (aa + bb)^2;
 \end{minted}
-\begin{equation}
-\tag{$\mathop{\mathrm{\%o}_{1}}$}{\left(\mathop{\mathrm{bb}}+\mathop{\mathrm{aa}}\right)}^{2}
-\label{eq:doc-group1-code36-1-1}
-\end{equation}
+\begin{dmath}[number={\(\mathop{\mathrm{\%o}_{1}}\)}]
+{\left(\mathop{\mathrm{bb}}+\mathop{\mathrm{aa}}\right)}^{2}
+\end{dmath}
 \begin{minted}[breaklines=true]{maxima}
 (%i2) :lisp $%
 \end{minted}
@@ -1593,17 +1449,15 @@ defines a Lisp function $\mathbf{foo}$ which evaluates its arguments.
 \begin{minted}[breaklines=true]{maxima}
 (%i2) (p: x + y, q: x - y);
 \end{minted}
-\begin{equation}
-\tag{$\mathop{\mathrm{\%o}_{2}}$}x-y
-\label{eq:doc-group1-code37-2-1}
-\end{equation}
+\begin{dmath}[number={\(\mathop{\mathrm{\%o}_{2}}\)}]
+x-y
+\end{dmath}
 \begin{minted}[breaklines=true]{maxima}
 (%i3) foo (p, q);
 \end{minted}
-\begin{equation}
-\tag{$\mathop{\mathrm{\%o}_{3}}$}\left(x-y\right) \left(y+x\right)+\pi
-\label{eq:doc-group1-code37-3-1}
-\end{equation}
+\begin{dmath}[number={\(\mathop{\mathrm{\%o}_{3}}\)}]
+\left(x-y\right) \left(y+x\right)+\pi
+\end{dmath}
 
 
 \item {\bf :lisp} $\mathrm{(}\mathbf{defmspec\ } \mathrm{\$foo\ (e)\ (\ldots))}$
@@ -1617,7 +1471,7 @@ Type (to-maxima) to restart, ($quit) to quit Maxima.
 \begin{minted}[breaklines=true]{maxima}
 (%i2) (defmspec $bar (e) (let ((a (cdr e))) `((mplus) ((mtimes) ,@a) $%pi)))
 \end{minted}
-\#\textless FUNCTION (LAMBDA (E)) \{1005B3084B\}\textgreater 
+\#\textless FUNCTION (LAMBDA (E)) \{10025BF8BB\}\textgreater
 \begin{minted}[breaklines=true]{maxima}
 (%i3) (to-maxima)
 \end{minted}
@@ -1627,24 +1481,21 @@ Returning to Maxima
 \begin{minted}[breaklines=true]{maxima}
 (%i4) (p: x + y, q: x - y);
 \end{minted}
-\begin{equation}
-\tag{$\mathop{\mathrm{\%o}_{2}}$}x-y
-\label{eq:doc-group1-code38-4-1}
-\end{equation}
+\begin{dmath}[number={\(\mathop{\mathrm{\%o}_{2}}\)}]
+x-y
+\end{dmath}
 \begin{minted}[breaklines=true]{maxima}
 (%i5) bar (p, q);
 \end{minted}
-\begin{equation}
-\tag{$\mathop{\mathrm{\%o}_{3}}$}p q+\pi
-\label{eq:doc-group1-code38-5-1}
-\end{equation}
+\begin{dmath}[number={\(\mathop{\mathrm{\%o}_{3}}\)}]
+p q+\pi
+\end{dmath}
 \begin{minted}[breaklines=true]{maxima}
 (%i6) bar (''p, ''q);
 \end{minted}
-\begin{equation}
-\tag{$\mathop{\mathrm{\%o}_{4}}$}\left(x-y\right) \left(y+x\right)+\pi
-\label{eq:doc-group1-code38-6-1}
-\end{equation}
+\begin{dmath}[number={\(\mathop{\mathrm{\%o}_{4}}\)}]
+\left(x-y\right) \left(y+x\right)+\pi
+\end{dmath}
 
 
 \item From Lisp, the construct $(\mathbf{mfuncall\ '\$}\mathrm{foo\ }a_1 \ldots a_n)$
@@ -1653,20 +1504,18 @@ calls the function $\mathbf{foo}$ defined in Maxima.
 \begin{minted}[breaklines=true]{maxima}
 (%i1) blurf (x) := x^2;
 \end{minted}
-\begin{equation}
-\tag{$\mathop{\mathrm{\%o}_{1}}$}\mathop{\mathrm{blurf}}\left(x\right) := {x}^{2}
-\label{eq:doc-group1-code39-1-1}
-\end{equation}
+\begin{dmath}[number={\(\mathop{\mathrm{\%o}_{1}}\)}]
+\mathop{\mathrm{blurf}}\left(x\right) \hiderel{:=} {x}^{2}
+\end{dmath}
 \begin{minted}[breaklines=true]{maxima}
 (%i2) :lisp (displa (mfuncall '$blurf '((mplus) $grotz $mumble)))
 \end{minted}
-\begin{equation}
+\begin{dmath*}
 {\left(\mathop{\mathrm{mumble}}+\mathop{\mathrm{grotz}}\right)}^{2}
 \label{eq:doc-group1-code39-2-1}
-\end{equation}
+\end{dmath*}
 T
 
 \end{enumerate}
 
 \end{document}
-
