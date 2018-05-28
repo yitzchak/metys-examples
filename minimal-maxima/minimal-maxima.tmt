@@ -6,7 +6,7 @@
   stderr_echo=true, stderr_env=Verbatim,
   stderr_env_options.formatcom=\color{red},
   stdout_echo=true, stdout_env=Verbatim,
-  math_env=dmath*@
+  math_env=dmath*, split_math=false, wrap_math=false@
 \documentclass[12pt,leqno]{article}
 
 \usepackage[T1]{fontenc}

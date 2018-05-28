@@ -153,7 +153,7 @@ I've grouped several examples into a list so we can see them all together.
 (%i1) [a, foo, foo_bar, "Hello, world!", 42, 17.29];
 \end{minted}
 \begin{dmath}[number={\(\mathop{\mathrm{\%o}_{1}}\)}]
-\left[a, \mathop{\mathrm{foo}}, \mathop{\mathrm{foo\_bar}}, \mbox{"Hello, world!"}, 42, 17.29\right]
+\left[a, \mathop{\mathrm{foo}}, \mathop{\mathrm{foo\_bar}}, \text{"Hello, world!"}, 42, 17.29\right]
 \end{dmath}
 
 \item Mathematical expressions.
@@ -266,13 +266,13 @@ $\mathbf{atom}$ tells whether an expression is an atom.
 (%i1) op (p + q);
 \end{minted}
 \begin{dmath}[number={\(\mathop{\mathrm{\%o}_{1}}\)}]
-\mbox{"+"}
+\text{"+"}
 \end{dmath}
 \begin{minted}[breaklines=true]{maxima}
 (%i2) op (p + q > p*q);
 \end{minted}
 \begin{dmath}[number={\(\mathop{\mathrm{\%o}_{2}}\)}]
-\mbox{"\textgreater "}
+\text{"\textgreater "}
 \end{dmath}
 \begin{minted}[breaklines=true]{maxima}
 (%i3) op (sin (p + q));
@@ -290,7 +290,7 @@ $\mathbf{atom}$ tells whether an expression is an atom.
 (%i5) op (foo (p, q) := p - q);
 \end{minted}
 \begin{dmath}[number={\(\mathop{\mathrm{\%o}_{5}}\)}]
-\mbox{":="}
+\text{":="}
 \end{dmath}
 \begin{minted}[breaklines=true]{maxima}
 (%i6) args (p + q);
@@ -355,7 +355,7 @@ We'll come back to that later.
 (%i2) op ('(if p > q then p else q));
 \end{minted}
 \begin{dmath}[number={\(\mathop{\mathrm{\%o}_{2}}\)}]
-\mbox{"if"}
+\text{"if"}
 \end{dmath}
 \begin{minted}[breaklines=true]{maxima}
 (%i3) op ('(for x in L do print (x)));
@@ -522,7 +522,7 @@ y+x
 (%i3) save ("tmp.save", a, b, c);
 \end{minted}
 \begin{dmath}[number={\(\mathop{\mathrm{\%o}_{3}}\)}]
-\mbox{"/home/tburton/Documents/git/metys-examples/minimal-maxima/tmp.save"}
+\text{"/home/yitzi/Documents/git/metys-examples/minimal-maxima/tmp.save"}
 \end{dmath}
 \begin{minted}[breaklines=true]{maxima}
 (%i4) f (a) := a^b;
@@ -600,7 +600,7 @@ b-a
 (%i2) foo (x) := diff (sin (x), x);
 \end{minted}
 \begin{dmath}[number={\(\mathop{\mathrm{\%o}_{2}}\)}]
-\mathop{\mathrm{foo}}\left(x\right) \hiderel{:=} \frac{d}{d x}\sin x
+\mathop{\mathrm{foo}}\left(x\right) \hiderel{:=} \frac{d}{\mathop{dx}}\sin x
 \end{dmath}
 \begin{minted}[breaklines=true]{maxima}
 (%i3) foo (x) := ''(diff (sin (x), x));
@@ -1010,7 +1010,7 @@ for $\mathbf{foo} (1)$ Maxima attempts to evaluate $\mathbf{diff} (\mathbf{sin}(
 (%i1) foo (x) := diff (sin(x)^2, x);
 \end{minted}
 \begin{dmath}[number={\(\mathop{\mathrm{\%o}_{1}}\)}]
-\mathop{\mathrm{foo}}\left(x\right) \hiderel{:=} \frac{d}{d x}\sin^{2} x
+\mathop{\mathrm{foo}}\left(x\right) \hiderel{:=} \frac{d}{\mathop{dx}}\sin^{2} x
 \end{dmath}
 \begin{minted}[breaklines=true]{maxima}
 (%i2) foo (u);
@@ -1172,7 +1172,7 @@ x \cos \left(x y\right)
 (%i5) 'diff (sin (y*x), x, 2);
 \end{minted}
 \begin{dmath}[number={\(\mathop{\mathrm{\%o}_{5}}\)}]
-\frac{{d}^{2}}{d {x}^{2}}\sin \left(x y\right)
+\frac{d^{2}}{\mathop{dx}^{2}}\sin \left(x y\right)
 \end{dmath}
 
 
@@ -1184,14 +1184,14 @@ $\mathbf{plot2d}$ draws two-dimensional graphs.
 \end{minted}
 \includegraphics[width=\linewidth]{./figure/doc-group1-code31-1-1.pdf}
 \begin{dmath}[number={\(\mathop{\mathrm{\%o}_{1}}\)}]
-\left[\mbox{"/tmp/maxout22736.gnuplot"}, \mbox{"/tmp/m.pdf"}\right]
+\left[\text{"/tmp/maxout16945.gnuplot"}, \text{"/tmp/m.pdf"}\right]
 \end{dmath}
 \begin{minted}[breaklines=true]{maxima}
 (%i2) plot2d ([exp(-u), exp(-u) * sin(u)], [u, 0, 2*%pi]);
 \end{minted}
 \includegraphics[width=\linewidth]{./figure/doc-group1-code31-2-1.pdf}
 \begin{dmath}[number={\(\mathop{\mathrm{\%o}_{2}}\)}]
-\left[\mbox{"/tmp/maxout22736.gnuplot"}, \mbox{"/tmp/m.pdf"}\right]
+\left[\text{"/tmp/maxout16945.gnuplot"}, \text{"/tmp/m.pdf"}\right]
 \end{dmath}
 \begin{minted}[breaklines=true]{maxima}
 (%i3) xx: makelist (i/2.5, i, 1, 10);
@@ -1210,14 +1210,14 @@ $\mathbf{plot2d}$ draws two-dimensional graphs.
 \end{minted}
 \includegraphics[width=\linewidth]{./figure/doc-group1-code31-5-1.pdf}
 \begin{dmath}[number={\(\mathop{\mathrm{\%o}_{5}}\)}]
-\left[\mbox{"/tmp/maxout22736.gnuplot"}, \mbox{"/tmp/m.pdf"}\right]
+\left[\text{"/tmp/maxout16945.gnuplot"}, \text{"/tmp/m.pdf"}\right]
 \end{dmath}
 \begin{minted}[breaklines=true]{maxima}
 (%i6) plot2d ([discrete, xx, yy], [style, points]);
 \end{minted}
 \includegraphics[width=\linewidth]{./figure/doc-group1-code31-6-1.pdf}
 \begin{dmath}[number={\(\mathop{\mathrm{\%o}_{6}}\)}]
-\left[\mbox{"/tmp/maxout22736.gnuplot"}, \mbox{"/tmp/m.pdf"}\right]
+\left[\text{"/tmp/maxout16945.gnuplot"}, \text{"/tmp/m.pdf"}\right]
 \end{dmath}
 
 
@@ -1242,13 +1242,13 @@ $\mathbf{save}$ writes expressions to a file.
 (%i3) save ("my.session", a, b);
 \end{minted}
 \begin{dmath}[number={\(\mathop{\mathrm{\%o}_{3}}\)}]
-\mbox{"/home/tburton/Documents/git/metys-examples/minimal-maxima/my.session"}
+\text{"/home/yitzi/Documents/git/metys-examples/minimal-maxima/my.session"}
 \end{dmath}
 \begin{minted}[breaklines=true]{maxima}
 (%i4) save ("my.session", all);
 \end{minted}
 \begin{dmath}[number={\(\mathop{\mathrm{\%o}_{4}}\)}]
-\mbox{"/home/tburton/Documents/git/metys-examples/minimal-maxima/my.session"}
+\text{"/home/yitzi/Documents/git/metys-examples/minimal-maxima/my.session"}
 \end{dmath}
 
 
@@ -1257,7 +1257,7 @@ $\mathbf{load}$ reads expressions from a file.
 (%i5) load ("my.session");
 \end{minted}
 \begin{dmath}[number={\(\mathop{\mathrm{\%o}_{4}}\)}]
-\mbox{"my.session"}
+\text{"my.session"}
 \end{dmath}
 \begin{minted}[breaklines=true]{maxima}
 (%i6) a;
@@ -1471,7 +1471,7 @@ Type (to-maxima) to restart, ($quit) to quit Maxima.
 \begin{minted}[breaklines=true]{maxima}
 (%i2) (defmspec $bar (e) (let ((a (cdr e))) `((mplus) ((mtimes) ,@a) $%pi)))
 \end{minted}
-\#\textless FUNCTION (LAMBDA (E)) \{10025BF8BB\}\textgreater
+\#\textless FUNCTION (LAMBDA (E)) \{10029C2F8B\}\textgreater 
 \begin{minted}[breaklines=true]{maxima}
 (%i3) (to-maxima)
 \end{minted}
@@ -1512,10 +1512,10 @@ calls the function $\mathbf{foo}$ defined in Maxima.
 \end{minted}
 \begin{dmath*}
 {\left(\mathop{\mathrm{mumble}}+\mathop{\mathrm{grotz}}\right)}^{2}
-\label{eq:doc-group1-code39-2-1}
 \end{dmath*}
 T
 
 \end{enumerate}
 
 \end{document}
+
