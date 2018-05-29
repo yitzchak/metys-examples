@@ -1,3 +1,3 @@
 set_tex_environment('?mlabel, "", "");
 set_plot_option([pdf_file,"m.pdf"]);
-texify_add_styles(breqn, amsmath);
+texify_add_styles(breqn, amsmath, latex_diff_upright_d);

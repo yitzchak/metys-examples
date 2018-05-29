@@ -600,7 +600,7 @@ b-a
 (%i2) foo (x) := diff (sin (x), x);
 \end{minted}
 \begin{dmath}[number={\(\mathop{\mathrm{\%o}_{2}}\)}]
-\mathop{\mathrm{foo}}\left(x\right) \hiderel{:=} \frac{d}{\mathop{dx}}\sin x
+\mathop{\mathrm{foo}}\left(x\right) \hiderel{:=} \frac{\mathrm{d}}{\mathop{\mathrm{d}x}}\sin x
 \end{dmath}
 \begin{minted}[breaklines=true]{maxima}
 (%i3) foo (x) := ''(diff (sin (x), x));
@@ -706,7 +706,7 @@ Contrast this with the effect of quote-quote.
 (%i2) foo (x) := integrate (sin (a*x), x, 0, %pi);
 \end{minted}
 \begin{dmath}[number={\(\mathop{\mathrm{\%o}_{2}}\)}]
-\mathop{\mathrm{foo}}\left(x\right) \hiderel{:=} \int_{0}^{\pi}\sin \left(a x\right)\mathop{dx}
+\mathop{\mathrm{foo}}\left(x\right) \hiderel{:=} \int_{0}^{\pi} \sin \left(a x\right)\mathop{\mathrm{d}x}
 \end{dmath}
 \begin{minted}[breaklines=true]{maxima}
 (%i3) define (foo (x), integrate (sin (a*x), x, 0, %pi));
@@ -1010,7 +1010,7 @@ for $\mathbf{foo} (1)$ Maxima attempts to evaluate $\mathbf{diff} (\mathbf{sin}(
 (%i1) foo (x) := diff (sin(x)^2, x);
 \end{minted}
 \begin{dmath}[number={\(\mathop{\mathrm{\%o}_{1}}\)}]
-\mathop{\mathrm{foo}}\left(x\right) \hiderel{:=} \frac{d}{\mathop{dx}}\sin^{2} x
+\mathop{\mathrm{foo}}\left(x\right) \hiderel{:=} \frac{\mathrm{d}}{\mathop{\mathrm{d}x}}\sin^{2} x
 \end{dmath}
 \begin{minted}[breaklines=true]{maxima}
 (%i2) foo (u);
@@ -1133,13 +1133,13 @@ $\mathbf{integrate}$ computes definite and indefinite integrals.
 (%i6) integrate (exp (sin (t)), t, 0, %pi);
 \end{minted}
 \begin{dmath}[number={\(\mathop{\mathrm{\%o}_{6}}\)}]
-\int_{0}^{\pi}{e}^{\sin t}\mathop{dt}
+\int_{0}^{\pi} {e}^{\sin t}\mathop{\mathrm{d}t}
 \end{dmath}
 \begin{minted}[breaklines=true]{maxima}
 (%i7) 'integrate (exp(-u) * sin(u), u, 0, inf);
 \end{minted}
 \begin{dmath}[number={\(\mathop{\mathrm{\%o}_{7}}\)}]
-\int_{0}^{\infty}{e}^{-u} \sin u\mathop{du}
+\int_{0}^{\infty} {e}^{-u} \sin u\mathop{\mathrm{d}u}
 \end{dmath}
 
 
@@ -1172,7 +1172,7 @@ x \cos \left(x y\right)
 (%i5) 'diff (sin (y*x), x, 2);
 \end{minted}
 \begin{dmath}[number={\(\mathop{\mathrm{\%o}_{5}}\)}]
-\frac{d^{2}}{\mathop{dx}^{2}}\sin \left(x y\right)
+\frac{\mathrm{d}^{2}}{\mathop{\mathrm{d}x}^{2}}\sin \left(x y\right)
 \end{dmath}
 
 
@@ -1184,14 +1184,14 @@ $\mathbf{plot2d}$ draws two-dimensional graphs.
 \end{minted}
 \includegraphics[width=\linewidth]{./figure/doc-group1-code31-1-1.pdf}
 \begin{dmath}[number={\(\mathop{\mathrm{\%o}_{1}}\)}]
-\left[\text{"/tmp/maxout16945.gnuplot"}, \text{"/tmp/m.pdf"}\right]
+\left[\text{"/tmp/maxout1715.gnuplot"}, \text{"/tmp/m.pdf"}\right]
 \end{dmath}
 \begin{minted}[breaklines=true]{maxima}
 (%i2) plot2d ([exp(-u), exp(-u) * sin(u)], [u, 0, 2*%pi]);
 \end{minted}
 \includegraphics[width=\linewidth]{./figure/doc-group1-code31-2-1.pdf}
 \begin{dmath}[number={\(\mathop{\mathrm{\%o}_{2}}\)}]
-\left[\text{"/tmp/maxout16945.gnuplot"}, \text{"/tmp/m.pdf"}\right]
+\left[\text{"/tmp/maxout1715.gnuplot"}, \text{"/tmp/m.pdf"}\right]
 \end{dmath}
 \begin{minted}[breaklines=true]{maxima}
 (%i3) xx: makelist (i/2.5, i, 1, 10);
@@ -1210,14 +1210,14 @@ $\mathbf{plot2d}$ draws two-dimensional graphs.
 \end{minted}
 \includegraphics[width=\linewidth]{./figure/doc-group1-code31-5-1.pdf}
 \begin{dmath}[number={\(\mathop{\mathrm{\%o}_{5}}\)}]
-\left[\text{"/tmp/maxout16945.gnuplot"}, \text{"/tmp/m.pdf"}\right]
+\left[\text{"/tmp/maxout1715.gnuplot"}, \text{"/tmp/m.pdf"}\right]
 \end{dmath}
 \begin{minted}[breaklines=true]{maxima}
 (%i6) plot2d ([discrete, xx, yy], [style, points]);
 \end{minted}
 \includegraphics[width=\linewidth]{./figure/doc-group1-code31-6-1.pdf}
 \begin{dmath}[number={\(\mathop{\mathrm{\%o}_{6}}\)}]
-\left[\text{"/tmp/maxout16945.gnuplot"}, \text{"/tmp/m.pdf"}\right]
+\left[\text{"/tmp/maxout1715.gnuplot"}, \text{"/tmp/m.pdf"}\right]
 \end{dmath}
 
 
@@ -1471,7 +1471,7 @@ Type (to-maxima) to restart, ($quit) to quit Maxima.
 \begin{minted}[breaklines=true]{maxima}
 (%i2) (defmspec $bar (e) (let ((a (cdr e))) `((mplus) ((mtimes) ,@a) $%pi)))
 \end{minted}
-\#\textless FUNCTION (LAMBDA (E)) \{10029C2F8B\}\textgreater 
+\#\textless FUNCTION (LAMBDA (E)) \{1003422F8B\}\textgreater 
 \begin{minted}[breaklines=true]{maxima}
 (%i3) (to-maxima)
 \end{minted}
