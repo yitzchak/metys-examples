@@ -522,7 +522,7 @@ y+x
 (%i3) save ("tmp.save", a, b, c);
 \end{minted}
 \begin{dmath}[number={\(\mathop{\mathrm{\%o}_{3}}\)}]
-\text{"/home/yitzi/Documents/git/metys-examples/minimal-maxima/tmp.save"}
+\text{"/home/tburton/Documents/git/metys-examples/minimal-maxima/tmp.save"}
 \end{dmath}
 \begin{minted}[breaklines=true]{maxima}
 (%i4) f (a) := a^b;
@@ -782,7 +782,7 @@ are some functions which apply identities.
 (%i1) (a + b)^2;
 \end{minted}
 \begin{dmath}[number={\(\mathop{\mathrm{\%o}_{1}}\)}]
-{\left(b+a\right)}^{2}
+{\left(a+b\right)}^{2}
 \end{dmath}
 \begin{minted}[breaklines=true]{maxima}
 (%i2) expand (%);
@@ -824,7 +824,7 @@ a {e}^{i b}
 (%i8) demoivre (%);
 \end{minted}
 \begin{dmath}[number={\(\mathop{\mathrm{\%o}_{8}}\)}]
-a \left(i \sin b+\cos b\right)
+a \left(\cos b+i \sin b\right)
 \end{dmath}
 
 
@@ -886,37 +886,37 @@ $\mathbf{lambda}$ does not evaluate the function body.
 (%i1) f: lambda ([x, y], (x + y)*(x - y));
 \end{minted}
 \begin{dmath}[number={\(\mathop{\mathrm{\%o}_{1}}\)}]
-\lambda\left(\left[x, y\right], \left(x+y\right) \left(x-y\right)\right)
+\lambda\left(\left[x, y\right], \left(y+x\right) \left(x-y\right)\right)
 \end{dmath}
 \begin{minted}[breaklines=true]{maxima}
 (%i2) f (a, b);
 \end{minted}
 \begin{dmath}[number={\(\mathop{\mathrm{\%o}_{2}}\)}]
-\left(a-b\right) \left(b+a\right)
+\left(a-b\right) \left(a+b\right)
 \end{dmath}
 \begin{minted}[breaklines=true]{maxima}
 (%i3) apply (f, [p, q]);
 \end{minted}
 \begin{dmath}[number={\(\mathop{\mathrm{\%o}_{3}}\)}]
-\left(p-q\right) \left(q+p\right)
+\left(p-q\right) \left(p+q\right)
 \end{dmath}
 \begin{minted}[breaklines=true]{maxima}
 (%i4) map (f, [1, 2, 3], [a, b, c]);
 \end{minted}
 \begin{dmath}[number={\(\mathop{\mathrm{\%o}_{4}}\)}]
-\left[\left(1-a\right) \left(a+1\right), \left(2-b\right) \left(b+2\right), \left(3-c\right) \left(c+3\right)\right]
+\left[\left(1-a\right) \left(1+a\right), \left(2-b\right) \left(2+b\right), \left(3-c\right) \left(3+c\right)\right]
 \end{dmath}
 \begin{minted}[breaklines=true]{maxima}
 (%i5) apply (lambda ([x, y], (x + y)*(x - y)), [p, q]);
 \end{minted}
 \begin{dmath}[number={\(\mathop{\mathrm{\%o}_{5}}\)}]
-\left(p-q\right) \left(q+p\right)
+\left(p-q\right) \left(p+q\right)
 \end{dmath}
 \begin{minted}[breaklines=true]{maxima}
 (%i6) map (lambda ([x, y], (x + y)*(x - y)), [1, 2, 3], [a, b, c]);
 \end{minted}
 \begin{dmath}[number={\(\mathop{\mathrm{\%o}_{6}}\)}]
-\left[\left(1-a\right) \left(a+1\right), \left(2-b\right) \left(b+2\right), \left(3-c\right) \left(c+3\right)\right]
+\left[\left(1-a\right) \left(1+a\right), \left(2-b\right) \left(2+b\right), \left(3-c\right) \left(3+c\right)\right]
 \end{dmath}
 
 
@@ -1074,7 +1074,7 @@ z-5 y+x = 0
 (%i3) s: solve ([eq_1, eq_2], [x, z]);
 \end{minted}
 \begin{dmath}[number={\(\mathop{\mathrm{\%o}_{3}}\)}]
-\left[\left[x = -\frac{\left(b+5\right) y-\pi}{a-1}, z = \frac{\left(b+5 a\right) y-\pi}{a-1}\right]\right]
+\left[\left[x = -\frac{\left(5+b\right) y-\pi}{a-1}, z = \frac{\left(5 a+b\right) y-\pi}{a-1}\right]\right]
 \end{dmath}
 \begin{minted}[breaklines=true]{maxima}
 (%i4) length (s);
@@ -1086,7 +1086,7 @@ z-5 y+x = 0
 (%i5) [subst (s[1], eq_1), subst (s[1], eq_2)];
 \end{minted}
 \begin{dmath}[number={\(\mathop{\mathrm{\%o}_{5}}\)}]
-\left[\frac{\left(b+5 a\right) y-\pi}{a-1}-\frac{a \left(\left(b+5\right) y-\pi\right)}{a-1}+b y = \pi, \frac{\left(b+5 a\right) y-\pi}{a-1}-\frac{\left(b+5\right) y-\pi}{a-1}-5 y = 0\right]
+\left[\frac{\left(5 a+b\right) y-\pi}{a-1}-\frac{a \left(\left(5+b\right) y-\pi\right)}{a-1}+b y = \pi, \frac{\left(5 a+b\right) y-\pi}{a-1}-\frac{\left(5+b\right) y-\pi}{a-1}-5 y = 0\right]
 \end{dmath}
 \begin{minted}[breaklines=true]{maxima}
 (%i6) ratsimp (%);
@@ -1121,7 +1121,7 @@ $\mathbf{integrate}$ computes definite and indefinite integrals.
 (%i4) integrate (1/(1 + x), x, 0, a);
 \end{minted}
 \begin{dmath}[number={\(\mathop{\mathrm{\%o}_{4}}\)}]
-\ln \left(a+1\right)
+\ln \left(1+a\right)
 \end{dmath}
 \begin{minted}[breaklines=true]{maxima}
 (%i5) integrate (exp(-a*u) * sin(a*u), u, 0, inf);
@@ -1184,14 +1184,14 @@ $\mathbf{plot2d}$ draws two-dimensional graphs.
 \end{minted}
 \includegraphics[width=\linewidth]{./figure/doc-group1-code31-1-1.pdf}
 \begin{dmath}[number={\(\mathop{\mathrm{\%o}_{1}}\)}]
-\left[\text{"/tmp/maxout1715.gnuplot"}, \text{"/tmp/m.pdf"}\right]
+\left[\text{"/tmp/maxout12821.gnuplot"}, \text{"/tmp/m.pdf"}\right]
 \end{dmath}
 \begin{minted}[breaklines=true]{maxima}
 (%i2) plot2d ([exp(-u), exp(-u) * sin(u)], [u, 0, 2*%pi]);
 \end{minted}
 \includegraphics[width=\linewidth]{./figure/doc-group1-code31-2-1.pdf}
 \begin{dmath}[number={\(\mathop{\mathrm{\%o}_{2}}\)}]
-\left[\text{"/tmp/maxout1715.gnuplot"}, \text{"/tmp/m.pdf"}\right]
+\left[\text{"/tmp/maxout12821.gnuplot"}, \text{"/tmp/m.pdf"}\right]
 \end{dmath}
 \begin{minted}[breaklines=true]{maxima}
 (%i3) xx: makelist (i/2.5, i, 1, 10);
@@ -1210,14 +1210,14 @@ $\mathbf{plot2d}$ draws two-dimensional graphs.
 \end{minted}
 \includegraphics[width=\linewidth]{./figure/doc-group1-code31-5-1.pdf}
 \begin{dmath}[number={\(\mathop{\mathrm{\%o}_{5}}\)}]
-\left[\text{"/tmp/maxout1715.gnuplot"}, \text{"/tmp/m.pdf"}\right]
+\left[\text{"/tmp/maxout12821.gnuplot"}, \text{"/tmp/m.pdf"}\right]
 \end{dmath}
 \begin{minted}[breaklines=true]{maxima}
 (%i6) plot2d ([discrete, xx, yy], [style, points]);
 \end{minted}
 \includegraphics[width=\linewidth]{./figure/doc-group1-code31-6-1.pdf}
 \begin{dmath}[number={\(\mathop{\mathrm{\%o}_{6}}\)}]
-\left[\text{"/tmp/maxout1715.gnuplot"}, \text{"/tmp/m.pdf"}\right]
+\left[\text{"/tmp/maxout12821.gnuplot"}, \text{"/tmp/m.pdf"}\right]
 \end{dmath}
 
 
@@ -1242,13 +1242,13 @@ $\mathbf{save}$ writes expressions to a file.
 (%i3) save ("my.session", a, b);
 \end{minted}
 \begin{dmath}[number={\(\mathop{\mathrm{\%o}_{3}}\)}]
-\text{"/home/yitzi/Documents/git/metys-examples/minimal-maxima/my.session"}
+\text{"/home/tburton/Documents/git/metys-examples/minimal-maxima/my.session"}
 \end{dmath}
 \begin{minted}[breaklines=true]{maxima}
 (%i4) save ("my.session", all);
 \end{minted}
 \begin{dmath}[number={\(\mathop{\mathrm{\%o}_{4}}\)}]
-\text{"/home/yitzi/Documents/git/metys-examples/minimal-maxima/my.session"}
+\text{"/home/tburton/Documents/git/metys-examples/minimal-maxima/my.session"}
 \end{dmath}
 
 
@@ -1432,7 +1432,7 @@ to evaluate $\mathit{expr}$.
 (%i1) (aa + bb)^2;
 \end{minted}
 \begin{dmath}[number={\(\mathop{\mathrm{\%o}_{1}}\)}]
-{\left(\mathop{\mathrm{bb}}+\mathop{\mathrm{aa}}\right)}^{2}
+{\left(\mathop{\mathrm{aa}}+\mathop{\mathrm{bb}}\right)}^{2}
 \end{dmath}
 \begin{minted}[breaklines=true]{maxima}
 (%i2) :lisp $%
@@ -1456,7 +1456,7 @@ x-y
 (%i3) foo (p, q);
 \end{minted}
 \begin{dmath}[number={\(\mathop{\mathrm{\%o}_{3}}\)}]
-\left(x-y\right) \left(y+x\right)+\pi
+\left(x-y\right) \left(x+y\right)+\pi
 \end{dmath}
 
 
@@ -1471,7 +1471,7 @@ Type (to-maxima) to restart, ($quit) to quit Maxima.
 \begin{minted}[breaklines=true]{maxima}
 (%i2) (defmspec $bar (e) (let ((a (cdr e))) `((mplus) ((mtimes) ,@a) $%pi)))
 \end{minted}
-\#\textless FUNCTION (LAMBDA (E)) \{1003422F8B\}\textgreater 
+\#\textless FUNCTION (LAMBDA (E)) \{100399B87B\}\textgreater 
 \begin{minted}[breaklines=true]{maxima}
 (%i3) (to-maxima)
 \end{minted}
@@ -1494,7 +1494,7 @@ p q+\pi
 (%i6) bar (''p, ''q);
 \end{minted}
 \begin{dmath}[number={\(\mathop{\mathrm{\%o}_{4}}\)}]
-\left(x-y\right) \left(y+x\right)+\pi
+\left(x-y\right) \left(x+y\right)+\pi
 \end{dmath}
 
 
@@ -1511,7 +1511,7 @@ calls the function $\mathbf{foo}$ defined in Maxima.
 (%i2) :lisp (displa (mfuncall '$blurf '((mplus) $grotz $mumble)))
 \end{minted}
 \begin{dmath*}
-{\left(\mathop{\mathrm{mumble}}+\mathop{\mathrm{grotz}}\right)}^{2}
+{\left(\mathop{\mathrm{grotz}}+\mathop{\mathrm{mumble}}\right)}^{2}
 \end{dmath*}
 T
 
