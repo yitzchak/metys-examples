@@ -2,4 +2,4 @@
 
 (defun tex (x l r lop rop)
   (declare (ignore l r))
-  (list ($texify x)))
+  (list (texify-display x nil)))
